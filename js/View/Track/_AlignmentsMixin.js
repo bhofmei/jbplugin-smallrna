@@ -131,7 +131,8 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                     desc: 'Show 21-mers',
                     func: function(f){
                         return f.get('seq_length') == 21;
-                    }
+                    },
+                    title: 'Hide/show reads 21 bp long'
                 },
                 show22:{
                     desc: 'Show 22-mers',
@@ -186,19 +187,10 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                             menuAr.push('showpi','showOther');
                         else
                             menuAr.push('showOthers');
+                        console.log(menuAr);
+                        menuAr.push('hideForwardStrand','hideReverseStrand')
                        return track._makeFeatureFilterTrackMenuItems(
-                           [
-                               /*'hideDuplicateReads',
-                               'hideQCFailingReads',
-                               'hideMissingMatepairs',
-                               'hideSecondary',
-                               'hideSupplementary',
-                               'hideUnmapped',
-                               'SEPARATOR',*/
-                               'hideForwardStrand',
-                               'hideReverseStrand',
-                               'show21'
-                           ],
+                           menuAr,
                            filters );
                    });
     }

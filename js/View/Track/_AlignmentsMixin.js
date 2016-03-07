@@ -104,79 +104,15 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         return outSheets;
     },
 
-    // get the appropriate HTML color string to use for a given base
-    // letter.  case insensitive.  'reference' gives the color to draw matches with the reference.
-    colorForBase: function( base ) {
-        // get the base colors out of CSS
-        this._baseStyles = this._baseStyles || function() {
-            var colors = {};
-            try {
-                var styleSheets = this._getStyleSheets( document.styleSheets );
-                array.forEach( styleSheets, function( sheet ) {
-                    // avoid modifying cssRules for plugins which generates SecurityException on Firefox
-                    var classes = sheet.rules || sheet.cssRules;
-                    if( ! classes ) return;
-                    array.forEach( classes, function( c ) {
-                        var match = /^\.base_([^\s_]+)$/.exec( c.selectorText );
-                        if( match && match[1] ) {
-                            var base = match[1];
-                            match = /\#[0-9a-f]{3,6}|(?:rgb|hsl)a?\([^\)]*\)/gi.exec( c.cssText );
-                            if( match && match[0] ) {
-                                colors[ base.toLowerCase() ] = match[0];
-                                colors[ base.toUpperCase() ] = match[0];
-                            }
-                        }
-                    });
-                });
-            } catch(e) { /* catch errors from cross-domain stylesheets */ }
-
-            return colors;
-        }.call(this);
-
-        return this._baseStyles[base] || '#999';
-    },
-
-
     // filters for BAM alignments according to some flags
     /* this function needs updated */
     _getNamedFeatureFilters: function() {
         return lang.mixin( {}, this.inherited( arguments ),
             {
-                /*hideDuplicateReads: {
-                    desc: 'Hide PCR/Optical duplicate reads',
-                    func: function( f ) {
-                        return ! f.get('duplicate');
-                    }
-                },
-                hideQCFailingReads: {
-                    desc: 'Hide reads failing vendor QC',
-                    func: function( f ) {
-                        return ! f.get('qc_failed');
-                    }
-                },*/
-                hideSecondary: {
-                    desc: 'Hide secondary alignments',
-
-                    func: function( f ) {
-                        return ! f.get('secondary_alignment');
-                    }
-                },
-                hideSupplementary: {
+                /*hideSupplementary: {
                     desc: 'Hide supplementary alignments',
                     func: function( f ) {
                         return ! f.get('supplementary_alignment');
-                    }
-                },
-                /*hideMissingMatepairs: {
-                    desc: 'Hide reads with missing mate pairs',
-                    func: function( f ) {
-                        return ! ( f.get('multi_segment_template') && ! f.get('multi_segment_all_aligned') );
-                    }
-                },
-                hideUnmapped: {
-                    desc: 'Hide unmapped reads',
-                    func: function( f ) {
-                        return ! f.get('unmapped');
                     }
                 },*/
                 hideForwardStrand: {
@@ -190,6 +126,51 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                     func: function( f ) {
                         return f.get('strand') != -1;
                     }
+                },
+                show21:{
+                    desc: 'Show 21-mers',
+                    func: function(f){
+                        return f.get('seq_length') == 21;
+                    }
+                },
+                show22:{
+                    desc: 'Show 22-mers',
+                    func: function(f){
+                        return f.get('seq_length') == 22;
+                    }
+                },
+                show23:{
+                    desc: 'Show 23-mers',
+                    func: function(f){
+                        return f.get('seq_length') == 23;
+                    }
+                },
+                show24:{
+                    desc: 'Show 24-mers',
+                    func: function(f){
+                        return f.get('seq_length') == 24;
+                    }
+                },
+                showpi:{
+                    desc: 'Show piRNAs',
+                    func: function(f){
+                        var l = f.get('seq_length');
+                        return l > 25 && l < 32;
+                    }
+                },
+                showOther:{
+                    desc: 'Show others',
+                    func: function(f){
+                        var l = f.get('seq_length');
+                        return l < 21 || l == 25 || l > 31;
+                    }
+                },
+                showOthers:{
+                    desc: 'Show others',
+                    func: function(f){
+                        var l = f.get('seq_length');
+                        return l < 21 || l > 24;
+                    }
                 }
             });
     },
@@ -200,17 +181,23 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         var track = this;
         return when( this._getNamedFeatureFilters() )
             .then( function( filters ) {
+                       var menuAr = ['show21','show22','show23','show24' ];
+                        if(track.config.useAnimal)
+                            menuAr.push('showpi','showOther');
+                        else
+                            menuAr.push('showOthers');
                        return track._makeFeatureFilterTrackMenuItems(
                            [
                                /*'hideDuplicateReads',
                                'hideQCFailingReads',
-                               'hideMissingMatepairs',*/
+                               'hideMissingMatepairs',
                                'hideSecondary',
                                'hideSupplementary',
-                               /*'hideUnmapped',
+                               'hideUnmapped',
                                'SEPARATOR',*/
                                'hideForwardStrand',
-                               'hideReverseStrand'
+                               'hideReverseStrand',
+                               'show21'
                            ],
                            filters );
                    });

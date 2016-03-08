@@ -1,3 +1,11 @@
 /*
  * Styles for small RNA plugin
  */
+
+tr#select21 img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-21.png")
+}
+
+tr#select22 img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-22.png")
+}

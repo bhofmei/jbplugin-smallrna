@@ -10,7 +10,7 @@ define("SmallRNAPlugin/View/Track/_AlignmentsMixin", [
            'dojo/when',
            'JBrowse/Util',
            'JBrowse/Store/SeqFeature/_MismatchesMixin',
-           'JBrowse/View/Track/_NamedFeatureFiltersMixin'
+           'SmallRNAPlugin/View/Track/_NamedFeatureFiltersMixin'
         ],
         function(
             declare,
@@ -109,10 +109,41 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
     _getNamedFeatureFilters: function() {
         return lang.mixin( {}, this.inherited( arguments ),
             {
-                /*hideSupplementary: {
+                /*hideDuplicateReads: {
+                    desc: 'Hide PCR/Optical duplicate reads',
+                    func: function( f ) {
+                        return ! f.get('duplicate');
+                    }
+                },
+                hideQCFailingReads: {
+                    desc: 'Hide reads failing vendor QC',
+                    func: function( f ) {
+                        return ! f.get('qc_failed');
+                    }
+                },
+                hideSecondary: {
+                    desc: 'Hide secondary alignments',
+
+                    func: function( f ) {
+                        return ! f.get('secondary_alignment');
+                    }
+                },
+                hideSupplementary: {
                     desc: 'Hide supplementary alignments',
                     func: function( f ) {
                         return ! f.get('supplementary_alignment');
+                    }
+                },
+                hideMissingMatepairs: {
+                    desc: 'Hide reads with missing mate pairs',
+                    func: function( f ) {
+                        return ! ( f.get('multi_segment_template') && ! f.get('multi_segment_all_aligned') );
+                    }
+                },
+                hideUnmapped: {
+                    desc: 'Hide unmapped reads',
+                    func: function( f ) {
+                        return ! f.get('unmapped');
                     }
                 },*/
                 hideForwardStrand: {
@@ -127,70 +158,50 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                         return f.get('strand') != -1;
                     }
                 },
-                show21:{
-                    desc: 'Show 21-mers',
+                hide21:{
+                    desc: 'Hide 21-mers',
+                    title: 'Show/hide 21 bp long reads',
+                    id: 'select21',
                     func: function(f){
-                        return f.get('seq_length') == 21;
-                    },
-                    title: 'Hide/show reads 21 bp long'
-                },
-                show22:{
-                    desc: 'Show 22-mers',
-                    func: function(f){
-                        return f.get('seq_length') == 22;
+                        return f.get('seq_length') != 21;
                     }
                 },
-                show23:{
-                    desc: 'Show 23-mers',
+                hide22:{
+                    desc: 'Hide 22-mers',
+                    title: 'Show/hide 22 bp long reads',
+                    id: 'select22',
                     func: function(f){
-                        return f.get('seq_length') == 23;
+                        return f.get('seq_length') != 22;
                     }
                 },
-                show24:{
-                    desc: 'Show 24-mers',
+                hide23:{
+                    desc: 'Hide 23-mers',
+                    title: 'Show/hide 23 bp long reads',
                     func: function(f){
-                        return f.get('seq_length') == 24;
+                        return f.get('seq_length') != 23;
                     }
                 },
-                showpi:{
-                    desc: 'Show piRNAs',
-                    func: function(f){
-                        var l = f.get('seq_length');
-                        return l > 25 && l < 32;
-                    }
-                },
-                showOther:{
-                    desc: 'Show others',
-                    func: function(f){
-                        var l = f.get('seq_length');
-                        return l < 21 || l == 25 || l > 31;
-                    }
-                },
-                showOthers:{
-                    desc: 'Show others',
-                    func: function(f){
-                        var l = f.get('seq_length');
-                        return l < 21 || l > 24;
-                    }
-                }
+            
             });
     },
 
-    /* this function needs updated */
     _alignmentsFilterTrackMenuOptions: function() {
         // add toggles for feature filters
         var track = this;
         return when( this._getNamedFeatureFilters() )
             .then( function( filters ) {
-                       var menuAr = ['show21','show22','show23','show24' ];
-                        if(track.config.useAnimal)
-                            menuAr.push('showpi','showOther');
-                        else
-                            menuAr.push('showOthers');
-                        console.log(menuAr);
-                        menuAr.push('hideForwardStrand','hideReverseStrand')
-                       return track._makeFeatureFilterTrackMenuItems(
-                           menuAr,
+                       return track._makeFeatureFilterTrackMenuItems2(
+                           [
+                               /*'hideDuplicateReads',
+                               'hideQCFailingReads',
+                               'hideMissingMatepairs',
+                               'hideSecondary',
+                               'hideSupplementary',
+                               'hideUnmapped',
+                               'SEPARATOR',*/
+                               'hideForwardStrand',
+                               'hideReverseStrand'
+                           ],['hide21','hide22'],
                            filters );
                    });
     }

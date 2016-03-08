@@ -70,7 +70,8 @@ return declare( [Alignment], {
         var text = this.getFeatureLabel( feature );
         if( ! text )
             return null;
-        text = text + ' bp';
+        else if(!isNaN(text))
+            text = text + ' bp';
         var font = this.getStyle( feature, 'textFont' );
         var l = fRect ? this.makeBottomOrTopLabel( text, font, fRect ) : this.makePopupLabel( text, font );
         l.fill = this.getStyle( feature, 'textColor' );

@@ -59,23 +59,8 @@ return declare( null, {
 
         //     });
     },
-
-    _makeFeatureFilterTrackMenuItems: function( names, filters ) {
-        var thisB = this;
-        return when( filters || this._getNamedFeatureFilters() )
-            .then( function( filters ) {
-                       var m = array.map(
-                           names,
-                           function( name ) {
-                               return thisB._makeFeatureFilterTrackMenuItem( name, filters[name] );
-                           }
-                       );
-            console.log(m);
-            return m;
-                   });
-    },
     
-    _makeFeatureFilterTrackMenuItems2: function( names, sizes, filters ) {
+    _makeFeatureFilterTrackMenuItems: function( names, sizes, filters ) {
         var thisB = this;
         return when( filters || this._getNamedFeatureFilters() )
             .then( function( filters ) {

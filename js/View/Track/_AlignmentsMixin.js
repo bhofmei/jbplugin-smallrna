@@ -54,15 +54,21 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         if( f.get('seq') ) {
             fmt('Sequence and Quality', this._renderSeqQual( f ), f );
         }
-
+        
+        /* change filtering options to only capture the options we are interested in 
+        seq, qual, supplementary_alignment, source, seq_length, NH, CIGAR, seq_reverse_complemented(?)*/
         var additionalTags = array.filter(
             f.tags(), function(t) {
-                return ! {name:1,score:1,start:1,end:1,strand:1,note:1,subfeatures:1,type:1}[t.toLowerCase()];
+                return {supplementary_alignment:1,source:1,seq_length:1,NH:1,CIGAR:1,seq_reverse_complemented:1}[t.toLowerCase()];
             }
-        ).sort();
-
+        );
         dojo.forEach( additionalTags, function(t) {
-                          fmt( t, f.get(t), f );
+            if(t=="supplementary_alignment")
+                fmt("Multimapped",f.get(t),f);
+            else if(t=="NH")
+                fmt("Number mapped locations",f.get(t),f)
+            else
+                fmt( t, f.get(t), f );
         });
 
         return container;
@@ -109,21 +115,23 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
     _getNamedFeatureFilters: function() {
         return lang.mixin( {}, this.inherited( arguments ),
         {
-            /*
-            hideSupplementary: {
-                desc: 'Hide supplementary alignments',
+            hideMultiMappers: {
+                desc: 'Hide multi-mapped alignments',
+                title: 'Show only uniquely aligned reads',
                 func: function( f ) {
                     return ! f.get('supplementary_alignment');
                 }
-            }*/
+            },
             hideForwardStrand: {
                 desc: 'Hide reads aligned to the forward strand',
+                title:'Show/hide forward strand reads',
                 func: function( f ) {
                     return f.get('strand') != 1;
                 }
             },
             hideReverseStrand: {
                 desc: 'Hide reads aligned to the reverse strand',
+                title:'Show/hide reverse strand reads',
                 func: function( f ) {
                     return f.get('strand') != -1;
                 }
@@ -188,10 +196,11 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 if (track.config.isAnimal)
                     sizesAr.push('hidepi');
                 sizesAr.push('hideOthers');
-                return track._makeFeatureFilterTrackMenuItems2(
+                return track._makeFeatureFilterTrackMenuItems(
                    [
                        'hideForwardStrand',
-                       'hideReverseStrand'
+                       'hideReverseStrand',
+                       'hideMultiMappers'
                    ],
                     sizesAr,
                    filters );

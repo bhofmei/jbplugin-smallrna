@@ -48,12 +48,6 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hideMultiMappers: false,
                 hideForwardStrand: false,
                 hideReverseStrand: false,
-                /*show21: true,
-                show22: true,
-                show23: true,
-                show24: true,
-                showpi: true,
-                showOthers: true,*/
                 hide21: false,
                 hide22: false,
                 hide23: false,

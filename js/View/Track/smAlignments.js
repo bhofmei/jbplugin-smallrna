@@ -17,6 +17,13 @@ define( "SmallRNAPlugin/View/Track/smAlignments", [
         ) {
 
 return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
+    
+    constructor: function(arguments){
+      /*this.config.isAnimal = true;
+        if(typeof arguments.isAnimal != 'undefined' && !(arguments.isAnimal) ){
+            this.config.isAnimal = false;
+        }*/
+    },
 
     _defaultConfig: function() {
         var c = Util.deepUpdate(
@@ -35,7 +42,6 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hideMultiMappers: false,
                 hideForwardStrand: false,
                 hideReverseStrand: false,
-                useAnimal: true,
                 /*show21: true,
                 show22: true,
                 show23: true,
@@ -48,6 +54,7 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hide24: false,
                 hidepi: false,
                 hideOthers: false,
+                isAnimal: false,
 
                 histograms: {
                     description: 'coverage depth',

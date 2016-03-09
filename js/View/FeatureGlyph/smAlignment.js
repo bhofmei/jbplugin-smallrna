@@ -37,7 +37,7 @@ return declare( [Alignment], {
                         return strand == 1 || strand == '+' ? glyph.getStyle(feature,'_color_23') : glyph.getStyle(feature,'_color_23_rev');
                      else if(seqLen==24)
                         return strand == 1 || strand == '+' ? glyph.getStyle(feature,'_color_24') : glyph.getStyle(feature,'_color_24_rev');
-                     else if(seqLen > 24 && seqLen < 32 && track.config.useMammal)
+                     else if(seqLen > 25 && seqLen < 32 && track.config.isAnimal)
                         return strand == 1 || strand == '+' ? glyph.getStyle(feature,'_color_pi') : glyph.getStyle(feature,'_color_pi_rev');
                     else
                         return strand == 1 || strand == '+' ? glyph.getStyle(feature,'_color_other') : glyph.getStyle(feature,'_color_other_rev');

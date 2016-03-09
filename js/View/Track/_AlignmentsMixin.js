@@ -107,82 +107,86 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
     // filters for BAM alignments according to some flags
     /* this function needs updated */
     _getNamedFeatureFilters: function() {
+        console.log(this);
         return lang.mixin( {}, this.inherited( arguments ),
-            {
-                /*hideDuplicateReads: {
-                    desc: 'Hide PCR/Optical duplicate reads',
-                    func: function( f ) {
-                        return ! f.get('duplicate');
-                    }
-                },
-                hideQCFailingReads: {
-                    desc: 'Hide reads failing vendor QC',
-                    func: function( f ) {
-                        return ! f.get('qc_failed');
-                    }
-                },
-                hideSecondary: {
-                    desc: 'Hide secondary alignments',
-
-                    func: function( f ) {
-                        return ! f.get('secondary_alignment');
-                    }
-                },
-                hideSupplementary: {
-                    desc: 'Hide supplementary alignments',
-                    func: function( f ) {
-                        return ! f.get('supplementary_alignment');
-                    }
-                },
-                hideMissingMatepairs: {
-                    desc: 'Hide reads with missing mate pairs',
-                    func: function( f ) {
-                        return ! ( f.get('multi_segment_template') && ! f.get('multi_segment_all_aligned') );
-                    }
-                },
-                hideUnmapped: {
-                    desc: 'Hide unmapped reads',
-                    func: function( f ) {
-                        return ! f.get('unmapped');
-                    }
-                },*/
-                hideForwardStrand: {
-                    desc: 'Hide reads aligned to the forward strand',
-                    func: function( f ) {
-                        return f.get('strand') != 1;
-                    }
-                },
-                hideReverseStrand: {
-                    desc: 'Hide reads aligned to the reverse strand',
-                    func: function( f ) {
-                        return f.get('strand') != -1;
-                    }
-                },
-                hide21:{
-                    desc: 'Hide 21-mers',
-                    title: 'Show/hide 21 bp long reads',
-                    id: 'select21',
-                    func: function(f){
-                        return f.get('seq_length') != 21;
-                    }
-                },
-                hide22:{
-                    desc: 'Hide 22-mers',
-                    title: 'Show/hide 22 bp long reads',
-                    id: 'select22',
-                    func: function(f){
-                        return f.get('seq_length') != 22;
-                    }
-                },
-                hide23:{
-                    desc: 'Hide 23-mers',
-                    title: 'Show/hide 23 bp long reads',
-                    func: function(f){
-                        return f.get('seq_length') != 23;
-                    }
-                },
-            
-            });
+        {
+            /*
+            hideSupplementary: {
+                desc: 'Hide supplementary alignments',
+                func: function( f ) {
+                    return ! f.get('supplementary_alignment');
+                }
+            }*/
+            hideForwardStrand: {
+                desc: 'Hide reads aligned to the forward strand',
+                func: function( f ) {
+                    return f.get('strand') != 1;
+                }
+            },
+            hideReverseStrand: {
+                desc: 'Hide reads aligned to the reverse strand',
+                func: function( f ) {
+                    return f.get('strand') != -1;
+                }
+            },
+            hide21:{
+                desc: 'Hide 21-mers',
+                title: 'Show/hide 21 bp-long reads',
+                id: 'select21',
+                func: function(f){
+                    return f.get('seq_length') != 21;
+                }
+            },
+            hide22:{
+                desc: 'Hide 22-mers',
+                title: 'Show/hide 22 bp-long reads',
+                id: 'select22',
+                func: function(f){
+                    return f.get('seq_length') != 22;
+                }
+            },
+            hide23:{
+                desc: 'Hide 23-mers',
+                title: 'Show/hide 23 bp-long reads',
+                id: 'select23',
+                func: function(f){
+                    return f.get('seq_length') != 23;
+                }
+            },
+            hide24:{
+                desc: 'Hide 24-mers',
+                title: 'Show/hide 24 bp-long reads',
+                id: 'select24',
+                func: function(f){
+                    return f.get('seq_length') != 24;
+                }
+            },
+            hidepi:{
+                desc: 'Hide piRNAs',
+                title: 'Show/hide piRNAs (26-31 bp)',
+                id: 'selectpi',
+                func: function(f){
+                    return !(f.get('seq_length') > 25 && f.get('seq_length') < 32);
+                }
+            },
+            hideOther:{
+                /* for isAnimal */
+                desc: 'Hide others',
+                title: 'Show/hide all other sized reads',
+                id: 'selectother',
+                func: function(f){
+                    return !(f.get('seq_length') < 21 || f.get('seq_length') > 31 || f.get('seq_length')==25);
+                }
+            },
+            hideOthers:{
+                desc: 'Hide others',
+                title: 'Show/hide all other sized reads',
+                id: 'selectother',
+                func: function(f){
+                    return this.config.isAnimal ? !(f.get('seq_length') < 21 || f.get('seq_length') > 31 || f.get('seq_length')==25) : !(f.get('seq_length') < 21 || f.get('seq_length') > 24);
+                }
+            }
+        });
     },
 
     _alignmentsFilterTrackMenuOptions: function() {
@@ -190,20 +194,25 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         var track = this;
         return when( this._getNamedFeatureFilters() )
             .then( function( filters ) {
-                       return track._makeFeatureFilterTrackMenuItems2(
-                           [
-                               /*'hideDuplicateReads',
-                               'hideQCFailingReads',
-                               'hideMissingMatepairs',
-                               'hideSecondary',
-                               'hideSupplementary',
-                               'hideUnmapped',
-                               'SEPARATOR',*/
-                               'hideForwardStrand',
-                               'hideReverseStrand'
-                           ],['hide21','hide22'],
-                           filters );
-                   });
+                var sizesAr = ['hide21','hide22','hide23','hide24'];
+                if (track.config.isAnimal)
+                    sizesAr.push('hidepi');
+                sizesAr.push('hideOthers');
+                return track._makeFeatureFilterTrackMenuItems2(
+                   [
+                       /*'hideDuplicateReads',
+                       'hideQCFailingReads',
+                       'hideMissingMatepairs',
+                       'hideSecondary',
+                       'hideSupplementary',
+                       'hideUnmapped',
+                       'SEPARATOR',*/
+                       'hideForwardStrand',
+                       'hideReverseStrand'
+                   ],
+                    sizesAr,
+                   filters );
+            });
     }
 
 });

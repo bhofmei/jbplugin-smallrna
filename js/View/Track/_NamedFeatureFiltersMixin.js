@@ -96,7 +96,6 @@ return declare( null, {
                                    return thisB._makeFeatureFilterTrackMenuItem( name, filters[name] );
                                })
                 );
-                console.log(out);
                 return out;
             });
     },

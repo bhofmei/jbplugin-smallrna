@@ -33,7 +33,7 @@ The plant-specific smRNA color scheme is the default. However, if you want to us
 There is a priority scheme for the configuration. From highest priority to lowest, track-specific, dataset-specific, browser-specific, default plant  
 For example, the entire browser could be set as _animal_ but a particular dataset could be _plant_ and a particular track within the plant dataset could be _animal_
 
-1. To change for the entire browser, in jbrowse.conf
+To change for the entire **browser**, in jbrowse.conf
 
     [ plugins.SmallRNAPlugin ]
     location = plugins/SmallRNAPlugin
@@ -46,12 +46,12 @@ or in jbrowse_conf.json
         "isAnimal" : true }
     }
 
-2. To change for a dataset, in the dataset's tracks.conf under `[GENERAl]`, add
+To change for a **dataset**, in the dataset's tracks.conf under `[GENERAl]`, add
 
     [plugins.SmallRNAPlugin]
     isAnimal = true
 
-3. To change for a track, see below.
+To change for a **track**, see below.
 
 ##Using small RNA Tracks
 ###File Formats

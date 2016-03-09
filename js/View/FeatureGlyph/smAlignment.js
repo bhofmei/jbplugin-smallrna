@@ -60,7 +60,7 @@ return declare( [Alignment], {
                 strandArrow: true,
 
                 height: 7,
-                marginBottom: 1,
+                marginBottom: 0.5,
                 showMismatches: false
             }
             }

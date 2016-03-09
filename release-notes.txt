@@ -1,0 +1,5 @@
+# version 1.0 Mar 9, 2016
+First production ready version
+Supports coloring and filtering of reads by size
+Supports animal vs non-animal smRNA scheme (animal includes piRNAs which are 26-31 bp)
+Supports coloring and filtering based on multimapped status

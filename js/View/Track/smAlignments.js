@@ -19,10 +19,16 @@ define( "SmallRNAPlugin/View/Track/smAlignments", [
 return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
     
     constructor: function(arguments){
-      /*this.config.isAnimal = true;
-        if(typeof arguments.isAnimal != 'undefined' && !(arguments.isAnimal) ){
+        // priority inhertiance of the isAnimal option
+        // check track listing first, then plugin settings
+        if(typeof arguments.config.isAnimal != 'undefined' ){
+            this.config.isAnimal = arguments.config.isAnimal;
+        }else if(typeof this.browser.plugins.SmallRNAPlugin.config.isAnimal != 'undefined'){
+            this.config.isAnimal = this.browser.plugins.SmallRNAPlugin.config.isAnimal;
+        }else{
+            // should never need to reach this though
             this.config.isAnimal = false;
-        }*/
+        }
     },
 
     _defaultConfig: function() {
@@ -54,7 +60,6 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hide24: false,
                 hidepi: false,
                 hideOthers: false,
-                isAnimal: false,
 
                 histograms: {
                     description: 'coverage depth',

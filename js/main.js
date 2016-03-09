@@ -44,6 +44,11 @@ return declare( JBrowsePlugin,
         var thisB = this;
         var browser = this.browser;
         
+        // isAnimal is off by default
+        this.config.isAnimal = false;
+        if( typeof args.isAnimal != 'undefined' && !!(args.isAnimal) ){
+            this.config.isAnimal = !!(args.isAnimal);
+        }
     } // end constructor
 });
 });

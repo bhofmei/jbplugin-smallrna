@@ -107,7 +107,6 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
     // filters for BAM alignments according to some flags
     /* this function needs updated */
     _getNamedFeatureFilters: function() {
-        console.log(this);
         return lang.mixin( {}, this.inherited( arguments ),
         {
             /*
@@ -169,15 +168,6 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                     return !(f.get('seq_length') > 25 && f.get('seq_length') < 32);
                 }
             },
-            hideOther:{
-                /* for isAnimal */
-                desc: 'Hide others',
-                title: 'Show/hide all other sized reads',
-                id: 'selectother',
-                func: function(f){
-                    return !(f.get('seq_length') < 21 || f.get('seq_length') > 31 || f.get('seq_length')==25);
-                }
-            },
             hideOthers:{
                 desc: 'Hide others',
                 title: 'Show/hide all other sized reads',
@@ -200,13 +190,6 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 sizesAr.push('hideOthers');
                 return track._makeFeatureFilterTrackMenuItems2(
                    [
-                       /*'hideDuplicateReads',
-                       'hideQCFailingReads',
-                       'hideMissingMatepairs',
-                       'hideSecondary',
-                       'hideSupplementary',
-                       'hideUnmapped',
-                       'SEPARATOR',*/
                        'hideForwardStrand',
                        'hideReverseStrand'
                    ],

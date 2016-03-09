@@ -9,3 +9,19 @@ tr#select21 img.dijitCheckedMenuItemIcon{
 tr#select22 img.dijitCheckedMenuItemIcon{
     background-image: url("../img/checkmark-22.png")
 }
+
+tr#select23 img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-23.png")
+}
+
+tr#select24 img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-24.png")
+}
+
+tr#selectpi img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-pi.png")
+}
+
+tr#selectother img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-other.png")
+}

@@ -87,4 +87,10 @@ In tracks.conf,
 ##Multimapping
 Traditionally, for small RNA analysis is important to know if a read maps uniquely or multiple times within the genome. In this plugin, multi-mapped reads are shown in the appropriate color for the length, but are more transparent.  
 Reads are determined to be multi mapped based on the SAM flag (read is supplementary) or the SAM attribute `NH`. Even when multiple alignments for the same read are output in the BAM file, the mapping program may not set the flag or `NH` attribute. For example, bowtie does not set these even when `-k 2+`.  
-An additional script to add these flags to an existing BAM/SAM file is being developed but is  not currently available.
+An additional script to add these flags to an existing BAM/SAM file is being developed but is not currently available.
+
+##Future Plans
+The following features plan to be supported in the future. 
+- Create script to assign multimapping correctly
+- Origin axis on tracks with positive strand reads above origin and negative-strand reads below origin
+- Ability to filter by size/foward/reverse/multimapping for all tracks via a menu option

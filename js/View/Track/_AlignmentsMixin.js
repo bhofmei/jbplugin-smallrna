@@ -139,7 +139,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide21:{
                 desc: 'Hide 21-mers',
                 title: 'Show/hide 21 bp-long reads',
-                id: 'select21',
+                id: 'select-blue',
                 func: function(f){
                     return f.get('seq_length') != 21;
                 }
@@ -147,7 +147,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide22:{
                 desc: 'Hide 22-mers',
                 title: 'Show/hide 22 bp-long reads',
-                id: 'select22',
+                id: 'select-green',
                 func: function(f){
                     return f.get('seq_length') != 22;
                 }
@@ -155,7 +155,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide23:{
                 desc: 'Hide 23-mers',
                 title: 'Show/hide 23 bp-long reads',
-                id: 'select23',
+                id: 'select-orange',
                 func: function(f){
                     return f.get('seq_length') != 23;
                 }
@@ -163,7 +163,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide24:{
                 desc: 'Hide 24-mers',
                 title: 'Show/hide 24 bp-long reads',
-                id: 'select24',
+                id: 'select-red',
                 func: function(f){
                     return f.get('seq_length') != 24;
                 }
@@ -171,7 +171,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hidepi:{
                 desc: 'Hide piRNAs',
                 title: 'Show/hide piRNAs (26-31 bp)',
-                id: 'selectpi',
+                id: 'select-purple',
                 func: function(f){
                     return !(f.get('seq_length') > 25 && f.get('seq_length') < 32);
                 }
@@ -179,7 +179,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hideOthers:{
                 desc: 'Hide others',
                 title: 'Show/hide all other sized reads',
-                id: 'selectother',
+                id: 'select-yellow',
                 func: function(f){
                     return this.config.isAnimal ? !(f.get('seq_length') < 21 || f.get('seq_length') > 31 || f.get('seq_length')==25) : !(f.get('seq_length') < 21 || f.get('seq_length') > 24);
                 }

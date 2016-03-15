@@ -12,7 +12,7 @@ define("SmallRNAPlugin/View/FeatureGlyph/smAlignment", [
         ) {
 
 return declare( [Alignment], {
-
+    
     constructor: function() {
         this._drawMismatches = function() {};
 
@@ -31,31 +31,31 @@ return declare( [Alignment], {
                     if(Math.abs(strand) != 1 && strand != '+' && strand != '-')
                         return glyph.getStyle( feature, '_color_other' );
                     else if(seqLen==21)
-                        return multimapping ? glyph.getStyle(feature,'_color_21_multi') : glyph.getStyle(feature,'_color_21');
+                        return multimapping ? glyph.getStyle(feature,'_color_blue_multi') : glyph.getStyle(feature,'_color_blue');
                      else if(seqLen==22)
-                        return multimapping ? glyph.getStyle(feature,'_color_22_multi') : glyph.getStyle(feature,'_color_22');
+                        return multimapping ? glyph.getStyle(feature,'_color_green_multi') : glyph.getStyle(feature,'_color_green');
                      else if(seqLen==23)
-                        return multimapping ? glyph.getStyle(feature,'_color_23_multi') : glyph.getStyle(feature,'_color_23');
+                        return multimapping ? glyph.getStyle(feature,'_color_orange_multi') : glyph.getStyle(feature,'_color_orange');
                      else if(seqLen==24)
-                        return multimapping ? glyph.getStyle(feature,'_color_24_multi') : glyph.getStyle(feature,'_color_24');
+                        return multimapping ? glyph.getStyle(feature,'_color_red_multi') : glyph.getStyle(feature,'_color_red');
                      else if(seqLen > 25 && seqLen < 32 && track.config.isAnimal)
-                        return multimapping ? glyph.getStyle(feature,'_color_pi_multi') : glyph.getStyle(feature,'_color_pi');
+                        return multimapping ? glyph.getStyle(feature,'_color_purple_multi') : glyph.getStyle(feature,'_color_purple');
                     else
-                        return multimapping ? glyph.getStyle(feature,'_color_other_multi') : glyph.getStyle(feature,'_color_other');
+                        return multimapping ? glyph.getStyle(feature,'_color_yellow_multi') : glyph.getStyle(feature,'_color_yellow');
                 },
                 /* choose colors based on length and strand */
-                _color_21: '#F37A22', // orange
-                _color_21_multi: 'rgba(243,122,24,0.5)',
-                _color_22: '#3E98AF', // teal
-                _color_22_multi:'rgba(62,152,175,0.5)',
-                _color_23: '#A55EA4', // purple
-                _color_23_multi: 'rgba(165,94,164,0.5)',
-                _color_24: '#A94544', // red
-                _color_24_multi: 'rgba(169,69,68,0.5)',
-                _color_pi: '#8BC240', // green
-                _color_pi_multi: 'rgba(139,194,64,0.5)',
-                _color_other: '#FDCB0A', // yellow
-                _color_other_multi: 'rgba(253,203,10,0.5)',
+                _color_orange: '#F37A22', // orange
+                _color_orange_multi: 'rgba(243,122,24,0.5)',
+                _color_blue: '#3E98AF', // teal
+                _color_blue_multi:'rgba(62,152,175,0.5)',
+                _color_purple: '#A55EA4', // purple
+                _color_purple_multi: 'rgba(165,94,164,0.5)',
+                _color_red: '#A94544', // red
+                _color_red_multi: 'rgba(169,69,68,0.5)',
+                _color_green: '#8BC240', // green
+                _color_green_multi: 'rgba(139,194,64,0.5)',
+                _color_yellow: '#FDCB0A', // yellow
+                _color_yellow_multi: 'rgba(253,203,10,0.5)',
                 borderColor: null,
                 strandArrow: true,
 

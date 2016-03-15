@@ -2,26 +2,26 @@
  * Styles for small RNA plugin
  */
 
-tr#select21 img.dijitCheckedMenuItemIcon{
-    background-image: url("../img/checkmark-21.png")
+tr#select-blue img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-blue.png")
 }
 
-tr#select22 img.dijitCheckedMenuItemIcon{
-    background-image: url("../img/checkmark-22.png")
+tr#select-green img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-green.png")
 }
 
-tr#select23 img.dijitCheckedMenuItemIcon{
-    background-image: url("../img/checkmark-23.png")
+tr#select-orange img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-orange.png")
 }
 
-tr#select24 img.dijitCheckedMenuItemIcon{
-    background-image: url("../img/checkmark-24.png")
+tr#select-red img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-red.png")
 }
 
-tr#selectpi img.dijitCheckedMenuItemIcon{
-    background-image: url("../img/checkmark-pi.png")
+tr#select-purple img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-purple.png")
 }
 
-tr#selectother img.dijitCheckedMenuItemIcon{
-    background-image: url("../img/checkmark-other.png")
+tr#select-yellow img.dijitCheckedMenuItemIcon{
+    background-image: url("../img/checkmark-yellow.png")
 }

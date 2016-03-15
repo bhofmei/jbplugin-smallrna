@@ -1,3 +1,6 @@
+# version 1.0.1 Mar 14, 2016
+Changed coloring
+
 # version 1.0 Mar 9, 2016
 First production ready version
 Supports coloring and filtering of reads by size

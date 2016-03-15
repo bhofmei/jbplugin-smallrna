@@ -38,13 +38,6 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 glyph: 'SmallRNAPlugin/View/FeatureGlyph/smAlignment',
                 maxFeatureGlyphExpansion: 0,
                 maxFeatureScreenDensity: 6,
-
-                /*hideDuplicateReads: true,
-                hideQCFailingReads: true,
-                hideSecondary: true,
-                hideSupplementary: true,
-                hideUnmapped: true,
-                hideMissingMatepairs: false,*/
                 hideMultiMappers: false,
                 hideForwardStrand: false,
                 hideReverseStrand: false,

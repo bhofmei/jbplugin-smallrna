@@ -119,7 +119,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 desc: 'Hide multi-mapped alignments',
                 title: 'Show only uniquely aligned reads',
                 func: function( f ) {
-                    return ! (f.get('supplementary_alignment') || (typeof f.get('nh') != 'undefined' && f.get('nh') > 1 ) );
+                    return ! (f.get('supplementary_alignment') || (typeof f.get('nh') != 'undefined' && f.get('nh') > 1 ) || (typeof f.get('xm')!='undefined'&&f.get('xm')>1));
                 }
             },
             hideForwardStrand: {

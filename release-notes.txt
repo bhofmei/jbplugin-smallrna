@@ -1,3 +1,6 @@
+# version 1.0.2 Mar 18, 2016
+Use XM attribute (with sam flag and/or NH attribute) to determine if a read is multi mapped
+
 # version 1.0.1 Mar 14, 2016
 Changed coloring
 

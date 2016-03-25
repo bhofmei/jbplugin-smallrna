@@ -54,18 +54,19 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         if( f.get('seq') ) {
             fmt('Sequence and Quality', this._renderSeqQual( f ), f );
         }
+        /* multimapping */
+        var mm = (f.get('supplementary_alignment') || (typeof f.get('xm')!='undefined'&&f.get('xm')>1) || (typeof f.get('nh') != 'undefined' && f.get('nh') > 1 ));
+        fmt("Multimapped",mm,f);
         
         /* change filtering options to only capture the options we are interested in 
         seq, qual, supplementary_alignment, source, seq_length, NH, CIGAR, seq_reverse_complemented(?)*/
         var additionalTags = array.filter(
             f.tags(), function(t) {
-                return {supplementary_alignment:1,source:1,seq_length:1,NH:1,CIGAR:1,seq_reverse_complemented:1}[t.toLowerCase()];
+                return {source:1,seq_length:1,NH:1,CIGAR:1,seq_reverse_complemented:1}[t.toLowerCase()];
             }
         );
         dojo.forEach( additionalTags, function(t) {
-            if(t=="supplementary_alignment")
-                fmt("Multimapped",f.get(t),f);
-            else if(t=="NH")
+            if(t=="NH")
                 fmt("Number mapped locations",f.get(t),f)
             else
                 fmt( t, f.get(t), f );

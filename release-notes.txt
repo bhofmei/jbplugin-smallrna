@@ -1,3 +1,6 @@
+# version 1.0.3 Mar 25, 2016
+Correctly display multimapping status in the read detail pop-up
+
 # version 1.0.2 Mar 18, 2016
 Use XM attribute (with sam flag and/or NH attribute) to determine if a read is multi mapped
 

@@ -1,3 +1,6 @@
+#version 1.0.4 Apr 3, 2015
+Fixed issue with coloring of multi mapped reads; now show transparency when multimapped
+
 # version 1.0.3 Mar 25, 2016
 Correctly display multimapping status in the read detail pop-up
 

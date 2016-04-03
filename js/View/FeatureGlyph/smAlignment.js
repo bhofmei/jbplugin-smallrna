@@ -26,7 +26,7 @@ return declare( [Alignment], {
             style: {
                 color: function( feature, path, glyph, track ) {
                     var strand = feature.get('strand');
-                    var multimapping = feature.get('supplementary_alignment');
+                    var multimapping = (feature.get('supplementary_alignment') || (typeof feature.get('xm')!='undefined'&&feature.get('xm')>1) || (typeof feature.get('nh') != 'undefined' && feature.get('nh') > 1 ))
                     var seqLen = feature.get('seq_length');
                     if(Math.abs(strand) != 1 && strand != '+' && strand != '-')
                         return glyph.getStyle( feature, '_color_other' );
@@ -43,6 +43,7 @@ return declare( [Alignment], {
                     else
                         return multimapping ? glyph.getStyle(feature,'_color_yellow_multi') : glyph.getStyle(feature,'_color_yellow');
                 },
+                image: 'blue',
                 /* choose colors based on length and strand */
                 _color_orange: '#F37A22', // orange
                 _color_orange_multi: 'rgba(243,122,24,0.5)',

@@ -2,26 +2,55 @@
  * Styles for small RNA plugin
  */
 
-tr#select-blue img.dijitCheckedMenuItemIcon{
+div#smrna-filter-dialog-sizes div.dijit.dijitReset.dijitInline.dijitCheckBox{
+    margin-top: 1px;
+}
+
+tr#smrna-select-blue img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-blue.dijitCheckBox {
     background-image: url("../img/checkmark-blue.png")
 }
 
-tr#select-green img.dijitCheckedMenuItemIcon{
+tr#smrna-select-green img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-green.dijitCheckBox{
     background-image: url("../img/checkmark-green.png")
 }
 
-tr#select-orange img.dijitCheckedMenuItemIcon{
+tr#smrna-select-orange img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-orange.dijitCheckBox{
     background-image: url("../img/checkmark-orange.png")
 }
 
-tr#select-red img.dijitCheckedMenuItemIcon{
+tr#smrna-select-red img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-red.dijitCheckBox{
     background-image: url("../img/checkmark-red.png")
 }
 
-tr#select-purple img.dijitCheckedMenuItemIcon{
+tr#smrna-select-purple img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-purple.dijitCheckBox{
     background-image: url("../img/checkmark-purple.png")
 }
 
-tr#select-yellow img.dijitCheckedMenuItemIcon{
+tr#smrna-select-yellow img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-yellow.dijitCheckBox{
     background-image: url("../img/checkmark-yellow.png")
+}
+
+#smrna-filter-btn{
+    height:17px;
+    width: 17px;
+    background-image: url("../img/smrna-filter.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#smrna-filter-dialog-sizes{
+    float:left;
+    padding-right:10px;
+}
+#smrna-filter-dialog-others{
+    float:right;
+    padding-left:5px;
+}
+
+.smrna-filter-dialog-column h3{
+    margin: 2px 0px;
+}
+#smrna-filter-dialog-img{
+    padding-right:2px;
+    vertical-align: middle;
 }

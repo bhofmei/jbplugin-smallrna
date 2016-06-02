@@ -140,7 +140,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide21:{
                 desc: 'Hide 21-mers',
                 title: 'Show/hide 21 bp-long reads',
-                id: 'select-blue',
+                id: 'smrna-select-blue',
                 func: function(f){
                     return f.get('seq_length') != 21;
                 }
@@ -148,7 +148,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide22:{
                 desc: 'Hide 22-mers',
                 title: 'Show/hide 22 bp-long reads',
-                id: 'select-green',
+                id: 'smrna-select-green',
                 func: function(f){
                     return f.get('seq_length') != 22;
                 }
@@ -156,7 +156,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide23:{
                 desc: 'Hide 23-mers',
                 title: 'Show/hide 23 bp-long reads',
-                id: 'select-orange',
+                id: 'smrna-select-orange',
                 func: function(f){
                     return f.get('seq_length') != 23;
                 }
@@ -164,7 +164,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide24:{
                 desc: 'Hide 24-mers',
                 title: 'Show/hide 24 bp-long reads',
-                id: 'select-red',
+                id: 'smrna-select-red',
                 func: function(f){
                     return f.get('seq_length') != 24;
                 }
@@ -172,7 +172,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hidepi:{
                 desc: 'Hide piRNAs',
                 title: 'Show/hide piRNAs (26-31 bp)',
-                id: 'select-purple',
+                id: 'smrna-select-purple',
                 func: function(f){
                     return !(f.get('seq_length') > 25 && f.get('seq_length') < 32);
                 }
@@ -180,7 +180,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hideOthers:{
                 desc: 'Hide others',
                 title: 'Show/hide all other sized reads',
-                id: 'select-yellow',
+                id: 'smrna-select-yellow',
                 func: function(f){
                     return this.config.isAnimal ? !(f.get('seq_length') < 21 || f.get('seq_length') > 31 || f.get('seq_length')==25) : !(f.get('seq_length') < 21 || f.get('seq_length') > 24);
                 }

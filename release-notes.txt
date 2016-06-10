@@ -1,4 +1,14 @@
-#version 1.0.4 Apr 3, 2015
+# version 1.2.0 Jun 10, 2016
+Reads are organized on the y-axis by strand; positive reads on positive-strand y-axis and negative-strand reads on negative y-axis
+Also includes "max height exceeded" warning independently for the positive and negative y-axis
+In order to accommodate more data, the individual reads are smaller than the default heights for RNA-seq reads
+
+# version 1.1.0 Jun 2, 2016
+Filtering dialog for all visible tracks implemented
+Only works on visible tracks and only changes features in which the check box was clicked
+Colored checkboxes
+
+#version 1.0.4 Apr 3, 2016
 Fixed issue with coloring of multi mapped reads; now show transparency when multimapped
 
 # version 1.0.3 Mar 25, 2016

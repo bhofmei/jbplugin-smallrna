@@ -6,7 +6,8 @@ Based on the JBrowse tack type "Alignments2", the small RNA alignments track sho
 
 1.  Reads are colored by size not strand  
 2.  Reads can be filtered by size and/or multimapping  
-3.  There is animal and plant specific coloring because plant's don't have piRNAs. Plant coloring is the default. 
+3.  There is animal and plant specific coloring because plant's don't have piRNAs. Plant coloring is the default.
+4.  Reads are organized on a y-axis by strand with positive-strand reads above the y-axis origin and negative-strand reads below it.
 
 
 ##Install
@@ -92,5 +93,4 @@ An additional script to add these flags to an existing BAM/SAM file is being dev
 ##Future Plans
 The following features plan to be supported in the future. 
 - Create script to assign multimapping correctly
-- Origin axis on tracks with positive strand reads above origin and negative-strand reads below origin
-- Ability to filter by size/foward/reverse/multimapping for all tracks via a menu option
+- ability to manually toggle between histograms and reads view

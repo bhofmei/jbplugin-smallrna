@@ -54,3 +54,23 @@ tr#smrna-select-yellow img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitI
     padding-right:2px;
     vertical-align: middle;
 }
+
+/* height exceeded information*/
+div.block.height_overflow .smrna_height_overflow_message_top,
+div.block.height_overflow .smrna_height_overflow_message_bottom
+{
+    position: absolute;
+    color: rgb(77,77,77);
+    text-shadow: white 0px 0px 1px;
+    white-space: nowrap;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2000;
+}
+div.block.height_overflow .smrna_height_overflow_message_bottom{
+    border-bottom: 1.5px solid rgb(77,77,77);
+}
+div.block.height_overflow .smrna_height_overflow_message_top{
+    border-top: 1.5px solid rgb(77,77,77);
+}

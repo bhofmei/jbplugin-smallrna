@@ -47,6 +47,7 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hide24: false,
                 hidepi: false,
                 hideOthers: false,
+                maxHeight: 400,
 
                 histograms: {
                     description: 'coverage depth',

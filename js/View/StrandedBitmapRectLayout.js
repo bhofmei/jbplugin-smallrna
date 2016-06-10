@@ -29,13 +29,14 @@ return declare( null,{
         if( this.displayMode == 'compact' ) {
             this.pitchY = Math.round( this.pitchY/4 ) || 1;
             this.pitchX = Math.round( this.pitchX/4 ) || 1;
-        }
+        } // increase pitchY for collapsed view
+        if(this.displayMode == 'collapsed')
+            this.pitchY = Math.round(this.pitchY*2);
 
         this.bitmap = [];
         this.rectangles = {};
         this.maxHeight = Math.ceil( ( args.maxHeight || Infinity ) / this.pitchY );
         this.originY = (args.originY || (this.maxHeight == Infinity ? 600 : Math.floor(this.maxHeight/2.0)));
-        console.log(this.maxHeight, this.originY, this.pitchY, this.pitchX);
         this.pTotalHeight = 0; // total height, in units of bitmap squares (px/pitchY)
     },
 
@@ -78,7 +79,7 @@ return declare( null,{
         }} else if (strand == 1){
             // positive strand
             var maxTopPos = 0;
-            topStart = this.originY - pHeight - 1;
+            topStart = this.originY - pHeight - (this.displayMode == 'compact' ? 2 : 1);
             for(top = topStart; top >= maxTopPos; top =top - pHeight ){
                 if( ! this._collides( rectangle, top ) )
                     break;
@@ -91,10 +92,10 @@ return declare( null,{
         }*/
         //console.log(top,maxTop);
         if( (strand == -1 && top > maxTopNeg ) || (strand == 1 && top < maxTopPos) ) {
-            rectangle.top = top = null;
+            rectangle.top = top = (strand === -1 ? null : undefined );
             this.rectangles[id] = rectangle;
             this.pTotalHeight = Math.max( this.pTotalHeight||0, top+pHeight );
-            return null;
+            return (strand === -1 ? null : undefined );
         }
         else {
             rectangle.top = top;

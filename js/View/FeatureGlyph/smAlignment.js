@@ -60,7 +60,7 @@ return declare( [Alignment], {
                 borderColor: null,
                 strandArrow: false,
 
-                height: 7,
+                height: 4,
                 marginBottom: 0.5,
                 showMismatches: false
             }
@@ -97,8 +97,8 @@ return declare( [Alignment], {
             fRect.h,
             feature
         );
-        if( fRect.t === null )
-            return null;
+        if( fRect.t === null || fRect.t === undefined)
+            return fRect.t;
 
         fRect.f = feature;
 
@@ -121,7 +121,8 @@ return declare( [Alignment], {
         // we'll use for the rectangle itself
         fRect.rect = { l: fRect.l, h: fRect.h, w: Math.max( fRect.w, 2 ), t: 0 };
         fRect.w = fRect.rect.w; // in case it was increased
-        if( viewArgs.displayMode != 'compact' )
+        // only add margin for collapased view
+        if( viewArgs.displayMode === 'collapsed' )
             fRect.h += this.getStyle( feature, 'marginBottom' ) || 0;
         
         //var strand = fRect.strandArrow = feature.get('strand')

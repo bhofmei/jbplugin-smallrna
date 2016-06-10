@@ -9,11 +9,11 @@ define( "SmallRNAPlugin/View/Track/CanvasFeatures", [
             'dojo/_base/event',
             'dojo/mouse',
             'dojo/dom-construct',
+            'dojo/dom-class',
             'dojo/Deferred',
             'dojo/on',
             'JBrowse/has',
             'JBrowse/Util',
-            //'JBrowse/View/GranularRectLayout',
             'SmallRNAPlugin/View/StrandedBitmapRectLayout',
             'JBrowse/View/Track/BlockBased',
             'JBrowse/View/Track/_ExportMixin',
@@ -31,6 +31,7 @@ define( "SmallRNAPlugin/View/Track/CanvasFeatures", [
             domEvent,
             mouse,
             domConstruct,
+            domClass,
             Deferred,
             on,
             has,
@@ -148,10 +149,12 @@ return declare(
                 showTooltips: true,
                 label: 'name,id',
                 description: 'note, description',
-                origin_color: 'black'
+                origin_color: 'black',
+                clip_marker: true
             },
 
             displayMode: 'normal',
+            displayStyle: 'default',
 
             events: {
                 contextmenu: function( feature, fRect, block, track, evt ) {
@@ -207,6 +210,7 @@ return declare(
     guessGlyphType: function(feature) {
         return 'JBrowse/View/FeatureGlyph/'+( {'gene': 'Gene', 'mRNA': 'ProcessedTranscript', 'transcript': 'ProcessedTranscript' }[feature.get('type')] || 'Box' );
     },
+    
 
     fillBlock: function( args ) {
         var blockIndex = args.blockIndex;
@@ -230,6 +234,7 @@ return declare(
                     {
                         stats: stats,
                         displayMode: this.displayMode,
+                        displayStyle: this.displayStyle,
                         showFeatures: scale >= ( this.config.style.featureScale
                                                  || (stats.featureDensity||0) / this.config.maxFeatureScreenDensity ),
                         showLabels: this.showLabels && this.displayMode == "normal"
@@ -242,7 +247,7 @@ return declare(
                     args
                 );
 
-                if( renderArgs.showFeatures ) {
+                if( renderArgs.showFeatures || renderArgs.displayStyle ==='features' ) {
                     this.setLabel( this.key );
                     this.removeYScale();
                     this.fillFeatures( renderArgs );
@@ -572,9 +577,13 @@ return declare(
                                                 feature
                                             );
                                             if( fRect === null ) {
-                                                // could not lay out, would exceed our configured maxHeight
+                                                // could not lay out, would exceed our configured maxHeight for negative strand
                                                 // mark the block as exceeding the max height
-                                                block.maxHeightExceeded = true;
+                                                block.maxHeightExceededBottom = true;
+                                            } else if(fRect === undefined){
+                                                // could not layout because would exceed for postive strand
+                                                // mark as exceeding top max height
+                                                block.maxHeightExceededTop = true;
                                             }
                                             else {
                                                 // laid out successfully
@@ -641,26 +650,53 @@ return declare(
                                             ctx.scale(ratio, ratio);
                                         }
 
-
-
-                                        if( block.maxHeightExceeded )
-                                            thisB.markBlockHeightOverflow( block );
+                                        //console.log(block.maxHeightExceededBottom,block.maxHeightExceededTop);
+                                        // bottom overflow, aka negative strand
+                                        if( block.maxHeightExceededBottom )
+                                            thisB.markBlockHeightOverflow( block, false );
+                                        if( block.maxHeightExceededTop )
+                                            thisB.markBlockHeightOverflow(block, true);
 
                                         thisB.heightUpdate( totalHeight,
                                                             blockIndex );
-
 
                                         thisB.renderFeatures( args, fRects );
 
                                         thisB.renderClickMap( args, fRects );
                                         // add origin
                                         thisB.renderOrigin( args, layout.getOriginY() );
-
+                                        
                                         finishCallback();
                                     });
                                 },
                                 errorCallback
                               );
+    },
+        
+    markBlockHeightOverflow: function( block, top ) {
+        if( block.heightOverflowedBottom && !(top) )
+            return;
+        else if(block.heightOverflowedTop && top)
+            return;
+        // don't draw if we turned off clip markers
+        if(! this.config.style.clip_marker)
+            return;
+        if(top)
+            block.heightOverflowedTop = true;
+        else
+            block.heightOverflowedBottom = true;
+        
+        var topHeight = (top ? 0 : this.height-16);
+        block.heightOverflowed  = true;
+        domClass.add( block.domNode, 'height_overflow' );
+        domConstruct.create( 'div', {
+                                 className: 'smrna_height_overflow_message'+(top?'_top':'_bottom'),
+                                 innerHTML: 'Max height reached',
+                                 style: {
+                                     top: (topHeight) + 'px',
+                                     height: '16px'
+                                 }
+                             }, block.domNode );
     },
 
     startZoom: function() {

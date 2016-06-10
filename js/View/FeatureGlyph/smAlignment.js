@@ -58,7 +58,7 @@ return declare( [Alignment], {
                 _color_yellow: '#FDCB0A', // yellow
                 _color_yellow_multi: 'rgba(253,203,10,0.5)',
                 borderColor: null,
-                strandArrow: true,
+                strandArrow: false,
 
                 height: 7,
                 marginBottom: 0.5,
@@ -78,6 +78,76 @@ return declare( [Alignment], {
         var l = fRect ? this.makeBottomOrTopLabel( text, font, fRect ) : this.makePopupLabel( text, font );
         l.fill = this.getStyle( feature, 'textColor' );
         return l;
+    },
+    
+    layoutFeature: function( viewArgs, layout, feature ) {
+        var fRect = this._getFeatureRectangle( viewArgs, feature );
+
+        var scale = viewArgs.scale;
+        var leftBase = viewArgs.leftBase;
+        var startbp = fRect.l/scale + leftBase;
+        var endbp   = (fRect.l+fRect.w)/scale + leftBase;
+        // need to get the strand so we know about it but don't actually need to use it
+        var featStrand = feature.get('strand');
+        
+        fRect.t = layout.addRect(
+            feature.id(),
+            startbp,
+            endbp,
+            fRect.h,
+            feature
+        );
+        if( fRect.t === null )
+            return null;
+
+        fRect.f = feature;
+
+        return fRect;
+    },
+    
+    _getFeatureRectangle: function( viewArgs, feature ) {
+        var block = viewArgs.block;
+        var fRect = {
+            l: block.bpToX( feature.get('start') ),
+            h: this._getFeatureHeight(viewArgs, feature),
+            viewInfo: viewArgs,
+            f: feature,
+            glyph: this
+        };
+
+        fRect.w = block.bpToX( feature.get('end') ) - fRect.l;
+
+        // save the original rect in `rect` as the dimensions
+        // we'll use for the rectangle itself
+        fRect.rect = { l: fRect.l, h: fRect.h, w: Math.max( fRect.w, 2 ), t: 0 };
+        fRect.w = fRect.rect.w; // in case it was increased
+        if( viewArgs.displayMode != 'compact' )
+            fRect.h += this.getStyle( feature, 'marginBottom' ) || 0;
+        
+        //var strand = fRect.strandArrow = feature.get('strand')
+        // if we are showing strand arrowheads, expand the frect a little
+        if( this.getStyle( feature, 'strandArrow') ) {
+            var strand = fRect.strandArrow = feature.get('strand');
+
+            if( strand == -1 ) {
+                var i = this._embeddedImages.minusArrow;
+                fRect.w += i.width;
+                fRect.l -= i.width;
+            }
+            else {
+                var i = this._embeddedImages.plusArrow;
+                fRect.w += i.width;
+            }
+        }
+
+        // no labels or descriptions if displayMode is collapsed, so stop here
+        if( viewArgs.displayMode == "collapsed")
+            return fRect;
+
+        this._expandRectangleWithLabels( viewArgs, feature, fRect );
+        this._addMasksToRect( viewArgs, feature, fRect );
+
+        return fRect;
     }
 
 });

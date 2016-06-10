@@ -3,8 +3,8 @@ define( "SmallRNAPlugin/View/Track/smAlignments", [
             'dojo/_base/array',
             'dojo/promise/all',
             'JBrowse/Util',
-            //'SmallRNAPlugin/View/Track/CanvasFeatures',
-            'JBrowse/View/Track/CanvasFeatures',
+            'SmallRNAPlugin/View/Track/CanvasFeatures',
+            //'JBrowse/View/Track/CanvasFeatures',
             'SmallRNAPlugin/View/Track/_AlignmentsMixin'
         ],
         function(

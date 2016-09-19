@@ -105,7 +105,7 @@ return declare( null, {
         return { label: filterspec.desc,
                  title: filterspec.title,
                  type: 'dijit/CheckedMenuItem',
-                id:filterspec.id,
+                className:filterspec.id,
                  checked: !! thisB.config[filtername],
                  onClick: function(event) {
                      thisB._toggleFeatureFilter( filtername, this.checked );

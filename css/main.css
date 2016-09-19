@@ -6,27 +6,27 @@ div#smrna-filter-dialog-sizes div.dijit.dijitReset.dijitInline.dijitCheckBox{
     margin-top: 1px;
 }
 
-tr#smrna-select-blue img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-blue.dijitCheckBox {
+tr.smrna-select-blue span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-blue.dijitCheckBox {
     background-image: url("../img/checkmark-blue.png")
 }
 
-tr#smrna-select-green img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-green.dijitCheckBox{
+tr.smrna-select-green span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-green.dijitCheckBox{
     background-image: url("../img/checkmark-green.png")
 }
 
-tr#smrna-select-orange img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-orange.dijitCheckBox{
+tr.smrna-select-orange span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-orange.dijitCheckBox{
     background-image: url("../img/checkmark-orange.png")
 }
 
-tr#smrna-select-red img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-red.dijitCheckBox{
+tr.smrna-select-red span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-red.dijitCheckBox{
     background-image: url("../img/checkmark-red.png")
 }
 
-tr#smrna-select-purple img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-purple.dijitCheckBox{
+tr.smrna-select-purple span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-purple.dijitCheckBox{
     background-image: url("../img/checkmark-purple.png")
 }
 
-tr#smrna-select-yellow img.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-yellow.dijitCheckBox{
+tr.smrna-select-yellow span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon, div.dijit.dijitReset.dijitInline.smrna-select-yellow.dijitCheckBox{
     background-image: url("../img/checkmark-yellow.png")
 }
 

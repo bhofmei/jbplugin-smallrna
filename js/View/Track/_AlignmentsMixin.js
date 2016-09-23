@@ -39,7 +39,9 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         });
         fmt( 'Name', f.get('name'), f );
         fmt( 'Type', f.get('type'), f );
-        fmt( 'Score', f.get('score'), f );
+        // if score is undefined, that means it was originally 255
+        var score = (f.get('score'));
+        fmt( 'Score', (score === undefined ? 255 : score), f );
         fmt( 'Description', f.get('note'), f );
         fmt(
             'Position',

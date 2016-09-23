@@ -1,27 +1,4 @@
-require({cache:{
-'JBrowse/Plugin':function(){
-define("JBrowse/Plugin", [
-           'dojo/_base/declare',
-           'JBrowse/Component'
-       ],
-       function( declare, Component ) {
-return declare( Component,
-{
-    constructor: function( args ) {
-        this.name = args.name;
-        this.cssLoaded = args.cssLoaded;
-        this._finalizeConfig( args.config );
-    },
-
-    _defaultConfig: function() {
-        return {
-            baseUrl: '/plugins/'+this.name
-        };
-    }
-});
-});
-}}});
-define('SmallRNAPlugin/main',[ 
+define('SmallRNAPlugin/main',[
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
@@ -35,6 +12,7 @@ define('SmallRNAPlugin/main',[
     'dojo/query',
     'dojo/dom-geometry',
     'JBrowse/Plugin',
+    'JBrowse/Util',
     'dijit/MenuItem',
     "JBrowse/Browser",
     'SmallRNAPlugin/View/Track/smAlignments',
@@ -54,6 +32,7 @@ function(
     query,
     domGeom,
     JBrowsePlugin,
+    Util,
     dijitMenuItem,
     Browser,
     Alignments,
@@ -69,9 +48,13 @@ return declare( JBrowsePlugin,
         
         // isAnimal is off by default
         this.config.isAnimal = false;
-        if( typeof args.isAnimal != 'undefined' && !!(args.isAnimal) ){
-            this.config.isAnimal = !!(args.isAnimal);
+        if (browser.config.isAnimal === true || args.config.isAnimal === true){
+            this.config.isAnimal = true;
         }
+        if(this.config.isAnimal){
+            lang.extend(Alignments, {_isAnimal: thisB._isAnimal});
+        }
+
         // toolbar button
         browser.afterMilestone('initView',function(){
             var navBox = dojo.byId("navbox");
@@ -90,6 +73,11 @@ return declare( JBrowsePlugin,
                 }
             }, dojo.create('button',{},navBox))
         });
-    } // end constructor
+    }, // end constructor
+
+    _isAnimal: function(){
+        return true;
+    }
+
 });
 });

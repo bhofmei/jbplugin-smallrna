@@ -27,19 +27,10 @@ define( "SmallRNAPlugin/View/Track/smAlignments", [
 return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
     
     constructor: function(arguments){
-        // priority inhertiance of the isAnimal option
-        // check track listing first, then plugin settings
-        if(typeof arguments.config.isAnimal != 'undefined' ){
-            this.config.isAnimal = arguments.config.isAnimal;
-        }else if(typeof this.browser.plugins.SmallRNAPlugin.config.isAnimal != 'undefined'){
-            this.config.isAnimal = this.browser.plugins.SmallRNAPlugin.config.isAnimal;
-        }else{
-            // should never need to reach this though
-            this.config.isAnimal = false;
-        }
     },
 
     _defaultConfig: function() {
+        var thisB = this;
         var c = Util.deepUpdate(
             dojo.clone( this.inherited(arguments) ),
             {
@@ -56,6 +47,7 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hidepi: false,
                 hideOthers: false,
                 maxHeight: 400,
+                isAnimal: thisB._isAnimal(),
 
                 histograms: {
                     description: 'coverage depth',
@@ -75,6 +67,10 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
         return c;
     },
     
+    _isAnimal: function(){
+        return false;
+    },
+
     /* Functions from Canvas tracks that need to be changed for small-rna specific purposes */
     _getLayout: function( scale ) {
         if( ! this.layout || this._layoutpitchX != 4/scale ) {

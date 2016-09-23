@@ -1,3 +1,6 @@
+# version 1.2.2 Sept 23, 2016
+Option to solid-fill multimappers which will be useful for screenshots if user does not want multimappers to appear different
+
 # verison 1.2.1 Sept 19, 2016
 Fixed issue with track check boxes IDs that prevented filtering on multiple tracks
 

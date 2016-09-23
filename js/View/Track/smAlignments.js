@@ -67,7 +67,8 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                     label: "seq_length",
                     description: false,
                     origin_color: 'black',
-                    clip_marker: true
+                    clip_marker: true,
+                    solidFill: false
                 }
             }
         );

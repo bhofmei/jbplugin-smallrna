@@ -27,6 +27,8 @@ return declare( [Alignment], {
                 color: function( feature, path, glyph, track ) {
                     var strand = feature.get('strand');
                     var multimapping = (feature.get('supplementary_alignment') || (typeof feature.get('xm')!='undefined'&&feature.get('xm')>1) || (typeof feature.get('nh') != 'undefined' && feature.get('nh') > 1 ))
+                    // check if multimapping reads should be solid fill
+                    multimapping = (track.config.style.solidFill ? false : multimapping);
                     var seqLen = feature.get('seq_length');
                     if(Math.abs(strand) != 1 && strand != '+' && strand != '-')
                         return glyph.getStyle( feature, '_color_other' );

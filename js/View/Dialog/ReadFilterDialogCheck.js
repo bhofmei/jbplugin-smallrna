@@ -4,15 +4,26 @@ define( "SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
     'dojo/dom-construct',
     'dijit/focus',
     'dojo/_base/array',
-    'dijit/form/TextBox',
+    'dijit/form/NumberSpinner',
     'dijit/form/CheckBox',
     'JBrowse/View/Dialog/WithActionBar',
     'dojo/on',
     'dijit/form/Button',
-    'JBrowse/Model/Location',
     'SmallRNAPlugin/View/Track/_NamedFeatureFiltersMixin'
 ],
-function( declare, lang, dom, focus, array, dijitTextBox, dijitCheckedMenuItem, ActionBarDialog, on, Button, Location, NamedFeatureFiltersMixin ) {
+function(
+    declare,
+    lang,
+    dom,
+    focus,
+    array,
+    dijitNumberSpinner,
+    dijitCheckedMenuItem,
+    ActionBarDialog,
+    on,
+    Button,
+    NamedFeatureFiltersMixin
+) {
 
 return declare (ActionBarDialog,{
     /**
@@ -73,7 +84,12 @@ return declare (ActionBarDialog,{
                 label: 'Hide forward strand reads'},
             hideMultiMappers: { id:'hidemulti',
                 hide: (args.config.hideMultiMappers === true ? true : undefined ),
-                label: 'Hide multi-mapped alignments'}
+                label: 'Hide multi-mapped alignments'},
+            filterQuality: {
+                id: 'filterquality',
+                hide: (args.config.filterQuality === undefined ? 0 : args.config.filterQuality),
+                label: 'Minimum quality'
+            }
         }
     },
 
@@ -113,6 +129,7 @@ return declare (ActionBarDialog,{
             if( ! /\b(smAlignments)/.test( track.config.type ) )
                 return;
             for(var o in hide){
+                // handle quality filter info
                 var h = hide[o].hide;
                 if(h !== undefined)
                     track._toggleFeatureFilter(o, h);
@@ -149,13 +166,28 @@ return declare (ActionBarDialog,{
         dom.create('h3',{innerHTML:'Filter by other properties'},rightPane);
         for(var opt in dialog.otherProps){
             var obj = dialog.otherProps[opt];
-            var box = new dijitCheckedMenuItem({
-                id: 'smrna-dialog-'+obj.id+'-box',
-                title: obj.label,
-                _prop: opt,
-                checked: (obj.hide === true ? true : false),
-            });
-            box.onClick = dojo.hitch(this,'_setOtherProp',box);
+            var box;
+            if(opt==='filterQuality'){
+                box = new dijitNumberSpinner({
+                    id: 'smrna-dialog-'+obj.id+'-box',
+                    title: obj.label,
+                    _prop: opt,
+                    value: obj.hide,
+                    constraints: {min:0, max:100},
+                    smallDelta: 5,
+                    intermediateChanges: true,
+                });
+                box.onChange = dojo.hitch(this, '_setOtherProp', box);
+            }
+            else {
+                box = new dijitCheckedMenuItem({
+                    id: 'smrna-dialog-'+obj.id+'-box',
+                    title: obj.label,
+                    _prop: opt,
+                    checked: (obj.hide === true ? true : false),
+                });
+                box.onClick = dojo.hitch(this,'_setOtherProp',box);
+            }
             rightPane.appendChild(box.domNode);
             dom.create('label',{"for":'smrna-dialog-'+obj.id+'-box',innerHTML: obj.label},rightPane);
             rightPane.appendChild(dom.create('br'));
@@ -177,7 +209,7 @@ return declare (ActionBarDialog,{
     },
     _setOtherProp: function(box){
        if(this.otherProps.hasOwnProperty(box._prop)){
-            this.otherProps[box._prop]['hide'] = box.checked;
+            this.otherProps[box._prop]['hide'] = (box.checked === undefined ? box.value : box.checked );
         } 
     },
 

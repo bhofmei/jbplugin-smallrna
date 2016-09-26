@@ -69,7 +69,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
         );
         dojo.forEach( additionalTags, function(t) {
             if(t=="NH")
-                fmt("Number mapped locations",f.get(t),f)
+                fmt("Number mapped locations",f.get(t),f);
             else
                 fmt( t, f.get(t), f );
         });
@@ -123,6 +123,13 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 title: 'Show only uniquely aligned reads',
                 func: function( f ) {
                     return ! (f.get('supplementary_alignment') || (typeof f.get('nh') != 'undefined' && f.get('nh') > 1 ) || (typeof f.get('xm')!='undefined'&&f.get('xm')>1));
+                }
+            },
+            filterQuality: {
+                desc: 'Filter by quality score',
+                title: 'Set minimum quality score for visible reads',
+                func: function( f ){
+                    return ( (this.config.minQuality === 0) || ((f.get('score') !== undefined) && f.get('score') !== 255 && f.get('score') >= this.config.minQuality ))
                 }
             },
             hideForwardStrand: {
@@ -201,6 +208,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 sizesAr.push('hideOthers');
                 return track._makeFeatureFilterTrackMenuItems(
                    [
+                       'filterQuality',
                        'hideForwardStrand',
                        'hideReverseStrand',
                        'hideMultiMappers'

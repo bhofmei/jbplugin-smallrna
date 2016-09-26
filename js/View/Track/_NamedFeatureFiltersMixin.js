@@ -1,12 +1,14 @@
 define("SmallRNAPlugin/View/Track/_NamedFeatureFiltersMixin", [
            'dojo/_base/declare',
            'dojo/_base/array',
-           'dojo/when'
+           'dojo/when',
+    'SmallRNAPlugin/View/Dialog/QualityFilterDialog'
        ],
        function(
            declare,
            array,
-           when
+           when,
+        QualityFilterDialog
        ) {
 return declare( null, {
     constructor: function() {
@@ -89,6 +91,25 @@ return declare( null, {
         var thisB = this;
         if( filtername == 'SEPARATOR' )
             return { type: 'dijit/MenuSeparator' };
+        // quality filter requires dialog box
+        else if(filtername == 'filterQuality'){
+            return {
+                label: filterspec.desc,
+                title: filterspec.title,
+                iconClass: 'dijitIconFilter',
+                action: function(){
+                    new QualityFilterDialog({
+                        min_quality: thisB.config.minQuality,
+                        setCallback: function(min_quality){
+                            thisB.config.minQuality = min_quality;
+                            thisB.addFeatureFilter( filterspec.func, filtername );
+                            thisB.changed();
+                        }
+                    }).show();
+                }
+            }
+        }
+        // all other filters
         return { label: filterspec.desc,
                  title: filterspec.title,
                  type: 'dijit/CheckedMenuItem',

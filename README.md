@@ -87,10 +87,19 @@ In tracks.conf,
 
 ##Multimapping
 Traditionally, for small RNA analysis is important to know if a read maps uniquely or multiple times within the genome. In this plugin, multi-mapped reads are shown in the appropriate color for the length, but are more transparent.  
-Reads are determined to be multi mapped based on the SAM flag (read is supplementary) or the SAM attribute `NH`. Even when multiple alignments for the same read are output in the BAM file, the mapping program may not set the flag or `NH` attribute. For example, bowtie does not set these even when `-k 2+`.  
+Reads are determined to be multi mapped based on the SAM flag (read is supplementary) or the SAM attribute `NH`. Even when multiple alignments for the same read are output in the BAM file, the mapping program may not set the flag or `NH` attribute. For example, bowtie does not set these even when `-k 2+`.
 An additional script to add these flags to an existing BAM/SAM file is being developed but is not currently available.
+
+##Quality Filtering
+Mapping programs vary greatly in how they assign quality scores for reads, the `MQ` or `MAPQ` score. 
+From the [SAM format specification](http://samtools.github.io/hts-specs/SAMv1.pdf),
+  > MAPQ: MAPping Quality. It equals −10 log10 Pr{mapping position is wrong}, rounded to the nearest
+integer. A value 255 indicates that the mapping quality is not available.
+
+To accommodate as many scoring schemes as possible, users can filter by minimum quality score.
+
+Reads with value 255 are shown when minimum quality score is 0 (i.e. no filtering), but are hidden for higher quality scores.
 
 ##Future Plans
 The following features plan to be supported in the future. 
 - Create script to assign multimapping correctly
-- ability to manually toggle between histograms and reads view

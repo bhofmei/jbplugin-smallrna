@@ -64,10 +64,10 @@ return declare ( ActionBarDialog,{
             constraints: this.scoreConstraints,
             smallDelta: 5,
             intermediateChanges: true,
-            style:"width:50px;"
+            style:"width:75px;margin-left:5px;"
         });
         this.set('content', [
-            domConstruct.create('label', { "for": 'smrna-track-min-quality', innerHTML: 'Min Quality ' } ),
+            domConstruct.create('label', { "for": 'smrna-track-min-quality', innerHTML: 'Min Quality' } ),
             this.minQualityText.domNode
         ] );
 

@@ -99,11 +99,9 @@ return declare( null, {
                 iconClass: 'dijitIconFilter',
                 action: function(){
                     new QualityFilterDialog({
-                        min_quality: thisB.config.minQuality,
+                        min_quality: thisB.config.filterQuality,
                         setCallback: function(min_quality){
-                            thisB.config.minQuality = min_quality;
-                            thisB.addFeatureFilter( filterspec.func, filtername );
-                            thisB.changed();
+                            thisB._toggleFeatureFilter( filtername, min_quality );
                         }
                     }).show();
                 }

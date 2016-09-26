@@ -47,7 +47,7 @@ return declare( [ CanvasFeatureTrack, AlignmentsMixin ], {
                 hidepi: false,
                 hideOthers: false,
                 maxHeight: 400,
-                minQuality: 0,
+                filterQuality: 0,
                 isAnimal: thisB._isAnimal(),
 
                 histograms: {

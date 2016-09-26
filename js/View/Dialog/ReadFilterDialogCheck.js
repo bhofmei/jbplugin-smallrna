@@ -176,7 +176,7 @@ return declare (ActionBarDialog,{
                     constraints: {min:0, max:100},
                     smallDelta: 5,
                     intermediateChanges: true,
-                    style:"width:75px;margin-left:5px;"
+                    style:"width:75px;margin-right:5px;"
                 });
                 box.onChange = dojo.hitch(this, '_setOtherProp', box);
             }

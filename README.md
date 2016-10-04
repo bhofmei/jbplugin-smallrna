@@ -98,7 +98,7 @@ integer. A value 255 indicates that the mapping quality is not available.
 
 To accommodate as many scoring schemes as possible, users can filter by minimum quality score.
 
-Reads with value 255 are shown when minimum quality score is 0 (i.e. no filtering), but are hidden for higher quality scores.
+Reads with value 255 are always shown.
 
 ##Future Plans
 The following features plan to be supported in the future. 

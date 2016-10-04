@@ -126,10 +126,11 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 }
             },
             filterQuality: {
-                desc: 'Filter by quality score',
-                title: 'Set minimum quality score for visible reads',
+                desc: 'Filter by mapping quality',
+                title: 'Set minimum mapping quality for visible reads',
+                alwaysfilter: true,
                 func: function( f ){
-                    return ( (this.config.filterQuality === 0) || ((f.get('score') !== undefined) && f.get('score') !== 255 && f.get('score') >= this.config.filterQuality ))
+                    return ( (this.config.filterQuality === 0) || ((f.get('score') === undefined) || f.get('score') === 255 || f.get('score') >= this.config.filterQuality ))
                 }
             },
             hideForwardStrand: {

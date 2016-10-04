@@ -13,6 +13,7 @@ define("SmallRNAPlugin/View/Track/_NamedFeatureFiltersMixin", [
 return declare( null, {
     constructor: function() {
         this._initializeConfiguredFeatureFilters();
+        this.alwaysfilter = ['filterQuality'];
     },
 
     _initializeConfiguredFeatureFilters: function() {
@@ -30,12 +31,14 @@ return declare( null, {
     },
 
     _toggleFeatureFilter: function( filtername, setActive ) {
+        var thisB = this;
+        var isAlwaysFilter = thisB.alwaysfilter.indexOf(filtername);
         // if no setActive, we will toggle it
         if( setActive === undefined )
             setActive = ! this.config[filtername];
 
         // nothing to do if not changed
-        if( !!setActive === !!this.config[filtername] )
+        if( !!setActive === !!this.config[filtername] && isAlwaysFilter === -1)
             return;
 
         this.config[filtername] = setActive;

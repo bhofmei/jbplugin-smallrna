@@ -88,7 +88,7 @@ return declare (ActionBarDialog,{
             filterQuality: {
                 id: 'filterquality',
                 hide: (args.config.filterQuality === undefined ? 0 : args.config.filterQuality),
-                label: 'Minimum quality'
+                label: 'Minimum mapping quality'
             }
         }
     },
@@ -122,7 +122,6 @@ return declare (ActionBarDialog,{
     filterCallback: function(){
         var dialog = this;
         var hide = lang.mixin(dialog.sizeProps,dialog.otherProps);
-        
         var tracks = dialog.browser.view.visibleTracks();
         array.forEach( tracks, function( track ) {
             // operate only on smAlignments tracks
@@ -173,10 +172,10 @@ return declare (ActionBarDialog,{
                     title: obj.label,
                     _prop: opt,
                     value: obj.hide,
-                    constraints: {min:0, max:100},
+                    constraints: {min:0, max:255},
                     smallDelta: 5,
                     intermediateChanges: true,
-                    style:"width:75px;margin-right:5px;"
+                    style:"width:50px;margin-right:5px;"
                 });
                 box.onChange = dojo.hitch(this, '_setOtherProp', box);
             }

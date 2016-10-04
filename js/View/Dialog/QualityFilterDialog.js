@@ -25,7 +25,7 @@ return declare ( ActionBarDialog,{
      * and max score of XYPlots
      */
 
-     title: 'Set minimum quality score',
+     title: 'Set minimum mapping quality',
     //autofocus: false,
 
      constructor: function( args ){
@@ -67,7 +67,7 @@ return declare ( ActionBarDialog,{
             style:"width:75px;margin-left:5px;"
         });
         this.set('content', [
-            domConstruct.create('label', { "for": 'smrna-track-min-quality', innerHTML: 'Min Quality' } ),
+            domConstruct.create('label', { "for": 'smrna-track-min-quality', innerHTML: 'Min Mapping Quality' } ),
             this.minQualityText.domNode
         ] );
 

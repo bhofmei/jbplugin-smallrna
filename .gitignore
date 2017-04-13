@@ -1,0 +1,6 @@
+.DS_Store
+test/*
+!test/index.html
+!test/spec
+!test/run-jasmine.js
+!test/data

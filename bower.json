@@ -1,0 +1,23 @@
+{
+  "name": "jbplugin-methylation",
+  "homepage": "https://github.com/bhofmei/jbplugin-smallrna#readme",
+  "description": "JBrowse plugin for viewing small RNA alignments",
+  "main": "js/main.js",
+  "keywords": [
+    "jbrowse",
+    "jbrowse-plugin",
+    "small rna"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test"
+  ],
+  "devDependencies": {
+    "jasmine-core": "jasmine#^2.4.1",
+    "jbrowse": "git://github.com/GMOD/jbrowse.git#master"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "jbplugin-smallrna",
+  "version": "1.3.1",
+  "description": "JBrowse plugin for viewing small RNA alignments",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhofmei/jbplugin-smallrna.git"
+  },
+  "keywords": [
+    "jbrowse",
+    "jbrowse-plugin",
+    "small rna"
+  ],
+  "author": "Brigitte Hofmeister",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhofmei/jbplugin-smallrna/issues"
+  },
+  "ignore": [
+    "node_modules",
+    "test"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "homepage": "https://github.com/bhofmei/jbplugin-smallrna#readme"
+}

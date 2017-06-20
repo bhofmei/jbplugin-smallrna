@@ -42,6 +42,7 @@ function(
 return declare( JBrowsePlugin,
 {
     constructor: function( args ) { 
+        console.log('SmallRNAPlugin starting');
         var baseUrl = this._defaultConfig().baseUrl;
         var thisB = this;
         var browser = this.browser;

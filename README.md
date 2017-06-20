@@ -33,6 +33,10 @@ If that doesn't work, add this to _jbrowse_conf_.json:
     "plugins" : {
         "SmallRNAPlugin" : { "location" : "plugins/SmallRNAPlugin" }
     }
+    
+## Test
+
+Sample data is included in the plugin to test that the plugin is working properly. With `URL` as the URL path to the JBrowse instance, navigate a web browser to `URL/index.html?data=plugins/SmallRNAPlugin/test/data`.
 
 ## Plants vs Animals
 The plant-specific smRNA color scheme is the default. However, if you want to use the animal-specific color scheme, it is very easy and flexible to change.  This is compatible with the [DNA Methylation plugin](https://github.com/bhofmei/jbplugin-methylation).
@@ -61,14 +65,16 @@ To change the plant or animal coloring scheme, for the specific track, include t
 
 In trackList.json,
 
-    {
-        "key" : "Small RNA",
-        "label" : "smrna",
-        "storeClass" : "JBrowse/Store/SeqFeature/BAM",
-        "urlTemplate" : "path/to/smallrna.bam",
-        "type" : "SmallRNAPlugin/View/Track/smAlignments",
-        "isAnimal" : true
-    }
+```
+{
+    "key" : "Small RNA",
+    "label" : "smrna",
+    "storeClass" : "JBrowse/Store/SeqFeature/BAM",
+    "urlTemplate" : "path/to/smallrna.bam",
+    "type" : "SmallRNAPlugin/View/Track/smAlignments",
+    "isAnimal" : true
+}
+```
 
 In tracks.conf,
 
@@ -78,6 +84,25 @@ In tracks.conf,
     urlTemplate = path/to/smallrna.bam
     type = SmallRNAPlugin/View/Track/smAlignments
     isAnimal = true
+
+Similar to other alignments, you can specify a BigWig file to use for the histogram view.
+
+In trackList.json,
+
+```
+{
+    "key" : "Small RNA",
+    "label" : "smrna",
+    "storeClass" : "JBrowse/Store/SeqFeature/BAM",
+    "urlTemplate" : "path/to/smallrna.bam",
+    "type" : "SmallRNAPlugin/View/Track/smAlignments",
+    "isAnimal" : true,
+    "histograms" : {
+        "storeClass" : "JBrowse/Store/SeqFeature/BigWig",
+        "urlTemplate" : "path/to/smallrna.bw"
+    }
+}
+```
 
 ## Multimapping
 Traditionally, for small RNA analysis is important to know if a read maps uniquely or multiple times within the genome. In this plugin, multi-mapped reads are shown in the appropriate color for the length, but are more transparent.  

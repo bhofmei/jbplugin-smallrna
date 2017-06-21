@@ -38,6 +38,8 @@ If that doesn't work, add this to _jbrowse_conf_.json:
 
 Sample data is included in the plugin to test that the plugin is working properly. With `URL` as the URL path to the JBrowse instance, navigate a web browser to `URL/index.html?data=plugins/SmallRNAPlugin/test/data`.
 
+![Demo Image](img/demo_image.png)
+
 ## Plants vs Animals
 The plant-specific smRNA color scheme is the default. However, if you want to use the animal-specific color scheme, it is very easy and flexible to change.  This is compatible with the [DNA Methylation plugin](https://github.com/bhofmei/jbplugin-methylation).
   

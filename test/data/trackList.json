@@ -51,7 +51,7 @@
          "type" : "SmallRNAPlugin/View/Track/smAlignments",
          "storeClass" : "JBrowse/Store/SeqFeature/BAM",
          "label" : "track_wild_type_smrna",
-         "urlTemplate" : "test_smrna_short.bam"
+         "urlTemplate" : "test_smrna_short_adjusted.bam"
       }
    ]
 }

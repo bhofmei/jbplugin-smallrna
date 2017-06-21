@@ -107,7 +107,6 @@ In trackList.json,
 ## Multimapping
 Traditionally, for small RNA analysis is important to know if a read maps uniquely or multiple times within the genome. In this plugin, multi-mapped reads are shown in the appropriate color for the length, but are more transparent.  
 Reads are determined to be multi mapped based on the SAM flag (read is supplementary) or the SAM attribute `NH`. Even when multiple alignments for the same read are output in the BAM file, the mapping program may not set the flag or `NH` attribute. For example, bowtie does not set these even when `-k 2+`.
-An additional script to add these flags to an existing BAM/SAM file is being developed but is not currently available.
 
 ## Quality Filtering
 Mapping programs vary greatly in how they assign quality scores for reads, the `MQ` or `MAPQ` score. 
@@ -122,4 +121,3 @@ Reads with value 255 are always shown.
 ## Future Plans
 The following features plan to be supported in the future.
 - Create a complementary HTML Track type (compared to canvas type currently used)
-- Create script to assign multimapping correctly

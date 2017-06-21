@@ -3,15 +3,20 @@ require([
     'dojo/_base/array',
     'JBrowse/Browser',
     'JBrowse/Store/SeqFeature/BAM',
-    'JBrowse/Model/XHRBlob',
-    'SmallRNAPlugin/View/Track/smAlignments'
+    //'JBrowse/Store/SeqFeature/BAM/LazyFeature',
+    'JBrowse/Model/SimpleFeature',
+    'SmallRNAPlugin/View/FeatureGlyph/smAlignment',
+    'SmallRNAPlugin/View/Track/smAlignments',
+    'JBrowse/View/FeatureGlyph/Box'
     ], function( 
         declare, 
         array,
         Browser,
         bamStore,
-        XHRBlob,
-        smAlignments
+        bamFeature,
+        smAlignment,
+        smAlignments,
+        BoxGlyph
     ) {
     
     describe( 'Initial test', function() {
@@ -25,7 +30,7 @@ require([
         var track = new smAlignments({
             browser: new Browser({unitTestMode: true}),
             config: {
-                urlTemplate: "../data/test_smrna_short.bam",
+                urlTemplate: "../data/test_smrna_short_adjusted.bam",
                 label: "testtrack"
             }
         });
@@ -41,7 +46,7 @@ require([
         var track = new smAlignments({
             browser: new Browser({unitTestMode: true}),
             config: {
-                urlTemplate: "../data/test_smrna_short.bam",
+                urlTemplate: "../data/test_smrna_short_adjusted.bam",
                 label: "testtrack",
                 histograms: {
                     urlTemplate: "../data/test_smrna_short.bw"
@@ -56,7 +61,7 @@ require([
     describe('Test features and filters', function(){
         var store = new bamStore({
             browser: new Browser({unitTestMode: true}),
-            urlTemplate: '../data/test_smrna_short_manually_adjusted.bam',
+            urlTemplate: '../data/test_smrna_short_adjusted.bam',
             refSeq: { name: 'Chr5', start: 0, end: 50001 }
         });
         it('constructed', function() {
@@ -84,18 +89,16 @@ require([
             var len22 = array.filter(features, function(f) { return f.get('seq_length')===22; });
             var plusStrand = array.filter(features, function(f) { return (f.get('strand')==="+" || f.get('strand')===1); });
             var seqTest = array.filter(features, function(f) { return f.get('seq')==="TTGTGGTTGTTCTTAGGCTTCAGT"; });
-            var multitest = array.filter(features, function(f) { return f.get('supplementary_alignment'); });
+            var multitest = array.filter(features, function(f) { return f.get('nh')>1; });
             var qualtest = array.filter(features, function(f) { return (f.get('score')>10 && f.get('score')<=30 ); });
 
             expect(len24.length).toBe(105);
             expect(len22.length).toBe(3);
             expect(plusStrand.length).toBe(36);
             expect(seqTest.length).toBe(5);
-            expect(multitest.length).toBe(14);
-            expect(qualtest.length).toBe(76);
-
+            expect(multitest.length).toBe(51);
+            expect(qualtest.length).toBe(71);
         });
-
     });
 
 });

@@ -90,7 +90,6 @@ return declare( null,{
             if( ! this._collides( rectangle, top ) )
                 break;
         }*/
-        //console.log(top,maxTop);
         if( (strand == -1 && top > maxTopNeg ) || (strand == 1 && top < maxTopPos) ) {
             rectangle.top = top = (strand === -1 ? null : undefined );
             this.rectangles[id] = rectangle;

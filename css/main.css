@@ -2,6 +2,7 @@
  * Styles for small RNA plugin
  */
 
+/* CHECKBOXES */
 div#smrna-filter-dialog-sizes div.dijit.dijitReset.dijitInline.dijitCheckBox{
     margin-top: 1px;
 }
@@ -42,6 +43,7 @@ div.dijit.dijitReset.dijitInline.smrna-select-yellow.dijitCheckBox{
     background-image: url("../img/checkmark-yellow.png")
 }
 
+/* TOOLBAR BUTTON AND DIALOG */
 #smrna-filter-btn{
     height:17px;
     width: 17px;
@@ -67,7 +69,7 @@ div.dijit.dijitReset.dijitInline.smrna-select-yellow.dijitCheckBox{
     vertical-align: middle;
 }
 
-/* height exceeded information*/
+/* HEIGHT EXCEEDED */
 div.block.height_overflow .smrna_height_overflow_message_top,
 div.block.height_overflow .smrna_height_overflow_message_bottom
 {
@@ -87,3 +89,35 @@ div.block.height_overflow .smrna_height_overflow_message_top{
     border-top: 1.5px solid rgb(77,77,77);
 }
 
+/* STYLES FOR HTML TYPE FEATURES */
+.smrna-alignment{
+  /* shouldn't need anything at the moment */
+}
+
+.smrna-21{
+  /* blue */
+  background: #3E98AF;
+}
+.smrna-22{
+  /* green */
+  background: #8BC240;
+}
+.smrna-23{
+  /* orange */
+  background: #F37A22;
+}
+.smrna-24{
+  /* red */
+  background: #A94544;
+}
+.smrna-pi{
+  /* purple */
+  background: #A55EA4;
+}
+.smrna-other{
+  /* yellow */
+  background: #FDCB0A;
+}
+.multimapped{
+  opacity: 0.5;
+}

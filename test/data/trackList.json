@@ -52,6 +52,14 @@
          "storeClass" : "JBrowse/Store/SeqFeature/BAM",
          "label" : "track_wild_type_smrna",
          "urlTemplate" : "test_smrna_short_adjusted.bam"
+      },
+     {
+         "category" : "Test data",
+         "key" : "Wild Type Small RNA HTML",
+         "type" : "SmallRNAPlugin/View/Track/smHTMLAlignments",
+         "storeClass" : "JBrowse/Store/SeqFeature/BAM",
+         "label" : "track_wild_type_smrna_html",
+         "urlTemplate" : "test_smrna_short_adjusted.bam"
       }
    ]
 }

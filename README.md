@@ -106,6 +106,38 @@ In trackList.json,
 }
 ```
 
+### HTML Features-style Track
+The track type `smAlignments` is preferred for its speed, but HTMLFeature alignments track is available. 
+It is comparable to JBrowse's Alignments track.
+
+This track type is beneficial when taking PDF/SVG screenshots so each read is an HTML element (compared to being painted on the canvas for smAlignments/Alignments2).
+
+Track configurations are the same except the track type and it does not accept a BigWig file for histograms.
+
+In _tracks.conf_,
+```
+[tracks.smrna-html]
+key = Small RNA - HTML
+storeClass = JBrowse/Store/SeqFeature/BAM
+urlTemplate = path/to/smallrna.bam
+type = SmallRNAPlugin/View/Track/smHTMLAlignments
+```
+
+In _trackList.json_,
+```
+{
+  "key" : "Small RNA - HTML",
+  "label" : "smrna-html",
+  "storeClass" : "JBrowse/Store/SeqFeature/BAM",
+  "urlTemplate" : "path/to/smallrna.bam",
+  "type" : "SmallRNAPlugin/View/Track/smHTMLAlignments",
+  "isAnimal" : true
+}
+```
+
+### Additional configurations
+By default, mutlimapped reads are lighter/less opaque. To disable this, use `style.solidFill = true` in _tracks.conf_ and `"style":{ "solidFill" : true }` in _trackList.json_.
+
 ## Multimapping
 Traditionally, for small RNA analysis is important to know if a read maps uniquely or multiple times within the genome. In this plugin, multi-mapped reads are shown in the appropriate color for the length, but are more transparent.  
 Reads are determined to be multi mapped based on the SAM flag (read is supplementary) or the SAM attribute `NH`. Even when multiple alignments for the same read are output in the BAM file, the mapping program may not set the flag or `NH` attribute. For example, bowtie does not set these even when `-k 2+`.
@@ -122,4 +154,4 @@ Reads with value 255 are always shown.
 
 ## Future Plans
 The following features plan to be supported in the future.
-- Create a complementary HTML Track type (compared to canvas type currently used)
+- Testing for smHTMLAlignments

@@ -1,4 +1,4 @@
-define('SmallRNAPlugin/main',[
+define('SmallRNAPlugin/main', [
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
@@ -16,9 +16,10 @@ define('SmallRNAPlugin/main',[
     'dijit/MenuItem',
     "JBrowse/Browser",
     'SmallRNAPlugin/View/Track/smAlignments',
+    'SmallRNAPlugin/View/Track/smHTMLAlignments',
     'SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck'
 ],
-function(
+  function (
     declare,
     array,
     lang,
@@ -36,49 +37,54 @@ function(
     dijitMenuItem,
     Browser,
     Alignments,
+    HTMLAlignments,
     smReadFilterDialog
-){
- 
-return declare( JBrowsePlugin,
-{
-    constructor: function( args ) { 
+  ) {
+
+    return declare(JBrowsePlugin, {
+      constructor: function (args) {
         console.log('SmallRNAPlugin starting');
         var baseUrl = this._defaultConfig().baseUrl;
         var thisB = this;
         var browser = this.browser;
-        
+
         // isAnimal is off by default
         this.config.isAnimal = false;
-        if (browser.config.isAnimal === true || args.config.isAnimal === true){
-            this.config.isAnimal = true;
+        if (browser.config.isAnimal === true || args.config.isAnimal === true) {
+          this.config.isAnimal = true;
         }
-        if(this.config.isAnimal){
-            lang.extend(Alignments, {_isAnimal: thisB._isAnimal});
+        if (this.config.isAnimal) {
+          lang.extend(Alignments, {
+            _isAnimal: thisB._isAnimal
+          });
+          lang.extend(HTMLAlignments, {
+            _isAnimal: thisB._isAnimal
+          });
         }
 
         // toolbar button
-        browser.afterMilestone('initView',function(){
-            var navBox = dojo.byId("navbox");
-            browser.smRNAButton = new dijitButton({
-                title: "Filter small RNA reads",
-                id: 'smrna-filter-btn',
-                width: '22px',
-                onClick: function(){
-                    new smReadFilterDialog({
-                        browser: browser,
-                        config: thisB.config,
-                        setCallback(options){
-                            thisB.config = options;
-                        }
-                    }).show();
+        browser.afterMilestone('initView', function () {
+          var navBox = dojo.byId("navbox");
+          browser.smRNAButton = new dijitButton({
+            title: "Filter small RNA reads",
+            id: 'smrna-filter-btn',
+            width: '22px',
+            onClick: function () {
+              new smReadFilterDialog({
+                browser: browser,
+                config: thisB.config,
+                setCallback(options) {
+                  thisB.config = options;
                 }
-            }, dojo.create('button',{},navBox))
+              }).show();
+            }
+          }, dojo.create('button', {}, navBox))
         });
-    }, // end constructor
+      }, // end constructor
 
-    _isAnimal: function(){
+      _isAnimal: function () {
         return true;
-    }
+      }
 
-});
-});
+    });
+  });

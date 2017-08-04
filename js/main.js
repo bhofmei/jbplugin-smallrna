@@ -16,7 +16,6 @@ define('SmallRNAPlugin/main', [
     'dijit/MenuItem',
     "JBrowse/Browser",
     'SmallRNAPlugin/View/Track/smAlignments',
-    'SmallRNAPlugin/View/Track/smHTMLAlignments',
     'SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck'
 ],
   function (
@@ -37,7 +36,6 @@ define('SmallRNAPlugin/main', [
     dijitMenuItem,
     Browser,
     Alignments,
-    HTMLAlignments,
     smReadFilterDialog
   ) {
 
@@ -73,7 +71,7 @@ define('SmallRNAPlugin/main', [
               new smReadFilterDialog({
                 browser: browser,
                 config: thisB.config,
-                setCallback(options) {
+                setCallback: function(options) {
                   thisB.config = options;
                 }
               }).show();

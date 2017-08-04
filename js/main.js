@@ -55,9 +55,9 @@ define('SmallRNAPlugin/main', [
           lang.extend(Alignments, {
             _isAnimal: thisB._isAnimal
           });
-          lang.extend(HTMLAlignments, {
+          /*lang.extend(HTMLAlignments, {
             _isAnimal: thisB._isAnimal
-          });
+          });*/
         }
 
         // toolbar button

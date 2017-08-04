@@ -64,6 +64,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
         );
         return c;
       },
+
       _isAnimal: function () {
         return false;
       },
@@ -265,7 +266,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
         if(seqLen > 25 && seqLen < 32 && this.config.isAnimal)
           domClass.add(featDiv, 'smrna-' + 'pi');
         // other
-        else if(seqLen < 21 || seqLen > 25)
+        else if(seqLen < 21 || seqLen >= 25)
           domClass.add(featDiv, 'smrna-' + 'other');
         // otherwise it's fine
         else

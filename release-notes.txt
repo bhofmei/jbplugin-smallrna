@@ -1,6 +1,6 @@
 Release Notes
 
-#v1.4.0 Aug 3, 2017
+# version 1.4.0 Aug 3, 2017
 - Added an HTMLFeature style track to compliment the default canvas style track
 - this is mainly useful for screenshots so reads are div objects not painted on the canvas
 

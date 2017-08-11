@@ -45,6 +45,7 @@ define('SmallRNAPlugin/main', [
         var baseUrl = this._defaultConfig().baseUrl;
         var thisB = this;
         var browser = this.browser;
+        this.config.version = '1.4.0';
 
         // isAnimal is off by default
         this.config.isAnimal = false;

@@ -17,7 +17,7 @@
     "test"
   ],
   "devDependencies": {
-    "jasmine-core": "jasmine#^2.4.1",
+    "jasmine-core": "jasmine-core#2.4.1",
     "jbrowse": "git://github.com/GMOD/jbrowse.git#master"
   }
 }

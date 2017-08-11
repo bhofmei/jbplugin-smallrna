@@ -11,8 +11,8 @@
     "url": "git+https://github.com/bhofmei/jbplugin-smallrna.git"
   },
   "keywords": [
-    "jbrowse",
-    "jbrowse-plugin",
+    "JBrowse",
+    "JBrowse plugin",
     "small rna"
   ],
   "author": "Brigitte Hofmeister",

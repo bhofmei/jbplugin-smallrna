@@ -15,8 +15,9 @@ define('SmallRNAPlugin/main', [
     'JBrowse/Util',
     'dijit/MenuItem',
     "JBrowse/Browser",
-    'SmallRNAPlugin/View/Track/smAlignments',
-    'SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck'
+    './View/Track/smAlignments',
+  './View/Track/smHTMLAlignments',
+    './View/Dialog/ReadFilterDialogCheck'
 ],
   function (
     declare,
@@ -36,6 +37,7 @@ define('SmallRNAPlugin/main', [
     dijitMenuItem,
     Browser,
     Alignments,
+    HTMLAlignments,
     smReadFilterDialog
   ) {
 
@@ -56,9 +58,9 @@ define('SmallRNAPlugin/main', [
           lang.extend(Alignments, {
             _isAnimal: thisB._isAnimal
           });
-          /*lang.extend(HTMLAlignments, {
+          lang.extend(HTMLAlignments, {
             _isAnimal: thisB._isAnimal
-          });*/
+          });
         }
 
         // toolbar button
@@ -72,7 +74,7 @@ define('SmallRNAPlugin/main', [
               new smReadFilterDialog({
                 browser: browser,
                 config: thisB.config,
-                setCallback: function(options) {
+                setCallback: function (options) {
                   thisB.config = options;
                 }
               }).show();

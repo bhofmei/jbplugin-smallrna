@@ -1,6 +1,3 @@
 .DS_Store
-test/*
-!test/index.html
-!test/spec
-!test/run-jasmine.js
-!test/data
+npm-debug.log
+node_modules

@@ -1,31 +1,35 @@
 {
-  "name": "SmallRNAPlugin",
-  "version": "1.4.0",
-  "description": "JBrowse plugin for viewing small RNA alignments",
-  "main": "js/main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bhofmei/jbplugin-smallrna.git"
-  },
-  "keywords": [
+    "name": "SmallRNAPlugin",
+    "version": "1.4.0",
+    "description": "JBrowse plugin for viewing small RNA alignments",
+    "main": "js/main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bhofmei/jbplugin-smallrna.git"
+    },
+    "keywords": [
     "JBrowse",
     "JBrowse plugin",
     "small rna"
   ],
-  "author": "Brigitte Hofmeister",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bhofmei/jbplugin-smallrna/issues"
-  },
-  "ignore": [
+    "author": "Brigitte Hofmeister",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/bhofmei/jbplugin-smallrna/issues"
+    },
+    "ignore": [
     "node_modules",
     "test"
   ],
-  "directories": {
-    "test": "test"
-  },
-  "homepage": "https://github.com/bhofmei/jbplugin-smallrna#readme"
+    "directories": {
+        "test": "test"
+    },
+    "homepage": "https://github.com/bhofmei/jbplugin-smallrna#readme",
+    "devDependencies": {
+        "jasmine": "^2.7.0",
+        "jbrowse": "git+https://github.com/bhofmei/jbrowse"
+    }
 }

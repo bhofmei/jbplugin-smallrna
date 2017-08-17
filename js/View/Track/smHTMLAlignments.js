@@ -1,5 +1,5 @@
 define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
-            'dojo/_base/declare',
+  'dojo/_base/declare',
             'dojo/_base/array',
   'dojo/_base/lang',
             'dojo/promise/all',
@@ -27,7 +27,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
 
     return declare([HTMLFeatures, AlignmentsMixin], {
 
-      constructor: function (arguments) {
+      constructor: function (args) {
         this.glyphHeight = 4;
       },
 
@@ -166,11 +166,11 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
               }
               curTrack.maskBySpans(invSpan, args.maskingSpans);
             }
-          if(block.maxHeightExceededBottom)
-            curTrack.markBlockHeightOverflow(block, false)
-          if(block.maxHeightExceededTop)
-            curTrack.markBlockHeightOverflow(block, true);
-          curTrack.renderOrigin(block, curTrack.layout.getOriginY());
+            if (block.maxHeightExceededBottom)
+              curTrack.markBlockHeightOverflow(block, false)
+            if (block.maxHeightExceededTop)
+              curTrack.markBlockHeightOverflow(block, true);
+            curTrack.renderOrigin(block, curTrack.layout.getOriginY());
             finishCallback();
           },
           function (error) {
@@ -215,7 +215,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
           // could not lay out, would exceed our configured maxHeight
           // mark the block as exceeding the max height
           //if (top === null && block.maxHeightExceededBottom !== true)
-          if(top === null)
+          if (top === null)
             block.maxHeightExceededBottom = true;
           //else if(block.maxHeightExceededTop !== true)
           else
@@ -263,10 +263,10 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
         domClass.add(featDiv, className);
         var seqLen = feature.get('seq_length');
         // pi rnas
-        if(seqLen > 25 && seqLen < 32 && this.config.isAnimal)
+        if (seqLen > 25 && seqLen < 32 && this.config.isAnimal)
           domClass.add(featDiv, 'smrna-' + 'pi');
         // other
-        else if(seqLen < 21 || seqLen >= 25)
+        else if (seqLen < 21 || seqLen >= 25)
           domClass.add(featDiv, 'smrna-' + 'other');
         // otherwise it's fine
         else
@@ -275,7 +275,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
 
         // check multimapping
         if (feature.get('supplementary_alignment') || (typeof feature.get('xm') != 'undefined' && feature.get('xm') > 1) || (typeof feature.get('nh') != 'undefined' && feature.get('nh') > 1)) {
-          if(!this.config.style.solidFill)
+          if (!this.config.style.solidFill)
             domClass.add(featDiv, 'multimapped');
         }
 
@@ -362,24 +362,24 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
       },
 
       renderOrigin: function (block, originY) {
-          var originColor = this.config.style.origin_color;
-          if (typeof originColor == 'string' && !{
-              'none': 1,
-              'off': 1,
-              'no': 1,
-              'zero': 1
-            }[originColor]) {
-              var origin = domConstruct.create('div', {
-                style: {
-                  background: originColor,
-                  height: '1px',
-                  width: '100%',
-                  top: originY + 'px'
-                },
-                className: 'feature'
-              }, block.domNode);
-            //block.domNode.addChild(origin);
-          }
+        var originColor = this.config.style.origin_color;
+        if (typeof originColor == 'string' && !{
+            'none': 1,
+            'off': 1,
+            'no': 1,
+            'zero': 1
+          }[originColor]) {
+          var origin = domConstruct.create('div', {
+            style: {
+              background: originColor,
+              height: '1px',
+              width: '100%',
+              top: originY + 'px'
+            },
+            className: 'feature'
+          }, block.domNode);
+          //block.domNode.addChild(origin);
+        }
       },
 
       _trackMenuOptions: function () {

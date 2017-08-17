@@ -1,15 +1,14 @@
 define("SmallRNAPlugin/View/Track/smAlignments", [
-            'dojo/_base/declare',
-            'dojo/_base/array',
-            'dojo/promise/all',
-            'dojo/dom-construct',
-            'dojo/dom-class',
-            'dojo/Deferred',
-            'JBrowse/Util',
-            'SmallRNAPlugin/View/StrandedBitmapRectLayout',
-            //'SmallRNAPlugin/View/Track/CanvasFeatures',
-            'JBrowse/View/Track/CanvasFeatures',
-            'SmallRNAPlugin/View/Track/_AlignmentsMixin'
+  'dojo/_base/declare',
+  'dojo/_base/array',
+  'dojo/promise/all',
+  'dojo/dom-construct',
+  'dojo/dom-class',
+  'dojo/Deferred',
+  'JBrowse/Util',
+  'SmallRNAPlugin/View/StrandedBitmapRectLayout',
+  'JBrowse/View/Track/CanvasFeatures',
+  'SmallRNAPlugin/View/Track/_AlignmentsMixin'
         ],
   function (
     declare,
@@ -26,7 +25,7 @@ define("SmallRNAPlugin/View/Track/smAlignments", [
 
     return declare([CanvasFeatureTrack, AlignmentsMixin], {
 
-      constructor: function (arguments) {},
+      constructor: function (args) {},
 
       _defaultConfig: function () {
         var thisB = this;

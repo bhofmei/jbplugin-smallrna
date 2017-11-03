@@ -40,6 +40,24 @@ Sample data is included in the plugin to test that the plugin is working properl
 
 ![Demo Image](img/demo_image.png)
 
+## The Basics
+- Each read is colored based on length
+  - Blue: 21 nt
+  - Green: 22 nt
+  - Purple: 23 nt
+  - Orange: 24 nt
+  - Red: piRNAs (26-31 nt)
+  - Gray: all other sizes
+  - *Colors were inspired by [this color scheme](https://mpss.danforthcenter.org/web/php/pages/legend.php?SITE=AT_sRNA)*
+- Reads are positions positions based on strand
+  - Above y-axis origin: positive strand
+  - Below y-axis origin: negative strand
+- Unfilled reads indicate read maps to multiple locations
+- Filtering options
+  - Filter an individual track using the track drop-down menu
+  - Filter all visible smRNA tracks using the toolbar button
+  - Filter for size, strand, read quality, multimapping
+
 ## Plants vs Animals
 The plant-specific smRNA color scheme is the default. However, if you want to use the animal-specific color scheme, it is very easy and flexible to change.  This is compatible with the [DNA Methylation plugin](https://github.com/bhofmei/jbplugin-methylation).
   

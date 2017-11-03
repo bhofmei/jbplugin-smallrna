@@ -63,25 +63,25 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
           hide23: {
             id: 'hide23',
             hide: (args.config.hide23 === true ? true : undefined),
-            'class': 'smrna-select-orange',
+            'class': 'smrna-select-purple',
             label: 'Hide 23-mers'
           },
           hide24: {
             id: 'hide24',
             hide: (args.config.hide24 === true ? true : undefined),
-            'class': 'smrna-select-red',
+            'class': 'smrna-select-orange',
             label: 'Hide 24-mers'
           },
           hidepi: {
             id: 'hidepi',
             hide: (args.config.hidepi === true ? true : undefined),
-            'class': 'smrna-select-purple',
+            'class': 'smrna-select-red',
             label: 'Hide piRNAs'
           },
           hideOthers: {
             id: 'hideOthers',
             hide: (args.config.hideOthers === true ? true : undefined),
-            'class': 'smrna-select-yellow',
+            'class': 'smrna-select-gray',
             label: 'Hide other sizes'
           }
         }
@@ -114,7 +114,7 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
       _fillActionBar: function (actionBar) {
         var ok_button = new Button({
           label: "OK",
-          onClick: dojo.hitch(this, function () {
+          onClick: lang.hitch(this, function () {
             this.filterCallback();
             var out = {
               isAnimal: this.isAnimal
@@ -132,7 +132,7 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
 
         var cancel_button = new Button({
           label: "Cancel",
-          onClick: dojo.hitch(this, function () {
+          onClick: lang.hitch(this, function () {
             this.cancelCallback && this.cancelCallback();
             this.hide();
           })
@@ -181,7 +181,7 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
             'class': obj.class,
             checked: (obj.hide === true ? true : false)
           });
-          box.onClick = dojo.hitch(this, '_setSizeProp', box);
+          box.onClick = lang.hitch(this, '_setSizeProp', box);
           leftPane.appendChild(box.domNode);
           dom.create('label', {
             "for": 'smrna-dialog-' + obj.id + '-box',
@@ -215,7 +215,7 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
               intermediateChanges: true,
               style: "width:50px;margin-right:5px;"
             });
-            box.onChange = dojo.hitch(this, '_setOtherProp', box);
+            box.onChange = lang.hitch(this, '_setOtherProp', box);
           } else {
             box = new dijitCheckedMenuItem({
               id: 'smrna-dialog-' + obj.id + '-box',
@@ -223,7 +223,7 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
               _prop: opt,
               checked: (obj.hide === true ? true : false)
             });
-            box.onClick = dojo.hitch(this, '_setOtherProp', box);
+            box.onClick = lang.hitch(this, '_setOtherProp', box);
           }
           rightPane.appendChild(box.domNode);
           dom.create('label', {
@@ -255,7 +255,7 @@ define("SmallRNAPlugin/View/Dialog/ReadFilterDialogCheck", [
 
       hide: function () {
         this.inherited(arguments);
-        window.setTimeout(dojo.hitch(this, 'destroyRecursive'), 500);
+        window.setTimeout(lang.hitch(this, 'destroyRecursive'), 500);
       }
     });
   });

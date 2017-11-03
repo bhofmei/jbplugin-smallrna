@@ -43,6 +43,12 @@ div.dijit.dijitReset.dijitInline.smrna-select-yellow.dijitCheckBox{
     background-image: url("../img/checkmark-yellow.png");
 }
 
+tr.smrna-select-gray span.dijitInline.dijitIcon.dijitMenuItemIcon.dijitCheckedMenuItemIcon,
+tr.smrna-select-gray img.dijitCheckedMenuItemIcon,
+div.dijit.dijitReset.dijitInline.smrna-select-gray.dijitCheckBox{
+    background-image: url("../img/checkmark-gray.png");
+}
+
 /* TOOLBAR BUTTON AND DIALOG */
 #smrna-filter-btn{
     height:17px;
@@ -97,27 +103,34 @@ div.block.height_overflow .smrna_height_overflow_message_top{
 .smrna-21{
   /* blue */
   background: #3E98AF;
+  border: solid 0px #3E98AF;
 }
 .smrna-22{
   /* green */
   background: #8BC240;
+  border: solid 0px #8BC240;
 }
 .smrna-23{
-  /* orange */
-  background: #F37A22;
-}
-.smrna-24{
-  /* red */
-  background: #A94544;
-}
-.smrna-pi{
   /* purple */
   background: #A55EA4;
+  border: solid 0px #A55EA4;
+}
+.smrna-24{
+  /* orange */
+  background: #F37A22;
+  border: solid 0px #F37A22;
+}
+.smrna-pi{
+  /* red */
+  background: #A94544;
+  border: solid 0px #A94544;
 }
 .smrna-other{
-  /* yellow */
-  background: #FDCB0A;
+  /* gray */
+  background: #646464;
+  border: solid 0px #646464;
 }
-.multimapped{
-  opacity: 0.5;
+.multimapped-read{
+  background: transparent;
+  border-width: 1px;
 }

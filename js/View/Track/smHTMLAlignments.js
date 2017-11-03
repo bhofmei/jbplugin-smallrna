@@ -34,7 +34,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
       _defaultConfig: function () {
         var thisB = this;
         var c = Util.deepUpdate(
-          dojo.clone(this.inherited(arguments)), {
+          lang.clone(this.inherited(arguments)), {
             maxFeatureScreenDensity: 6,
 
             hideMultiMappers: false,
@@ -114,7 +114,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
 
         var curTrack = this;
 
-        var featCallback = dojo.hitch(this, function (feature) {
+        var featCallback = lang.hitch(this, function (feature) {
           var uniqueId = feature.id();
           if (!this._featureIsRendered(uniqueId)) {
             if (this.filterFeature(feature)) {
@@ -276,7 +276,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
         // check multimapping
         if (feature.get('supplementary_alignment') || (typeof feature.get('xm') != 'undefined' && feature.get('xm') > 1) || (typeof feature.get('nh') != 'undefined' && feature.get('nh') > 1)) {
           if (!this.config.style.solidFill)
-            domClass.add(featDiv, 'multimapped');
+            domClass.add(featDiv, 'multimapped-read');
         }
 
         // Since some browsers don't deal well with the situation where
@@ -312,7 +312,7 @@ define("SmallRNAPlugin/View/Track/smHTMLAlignments", [
 
         // render the popup menu if configured
         if (this.config.menuTemplate) {
-          window.setTimeout(dojo.hitch(this, '_connectMenus', featDiv), 50 + Math.random() * 150);
+          window.setTimeout(lang.hitch(this, '_connectMenus', featDiv), 50 + Math.random() * 150);
         }
 
         if (typeof this.config.hooks.modify == 'function') {

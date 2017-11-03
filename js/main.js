@@ -5,6 +5,7 @@ define('SmallRNAPlugin/main', [
     'dojo/Deferred',
     'dojo/dom-construct',
     'dijit/form/Button',
+    'dijit/registry',
     'dojo/fx',
     'dojo/dom',
     'dojo/dom-style',
@@ -26,6 +27,7 @@ define('SmallRNAPlugin/main', [
     Deferred,
     domConstruct,
     dijitButton,
+    dijitRegistry,
     coreFx,
     dom,
     style,
@@ -43,16 +45,20 @@ define('SmallRNAPlugin/main', [
 
     return declare(JBrowsePlugin, {
       constructor: function (args) {
-        console.log('SmallRNAPlugin starting');
+        this.config.version = '1.4.1';
+        console.log('SmallRNAPlugin starting - v' + this.config.version);
         var baseUrl = this._defaultConfig().baseUrl;
         var thisB = this;
         var browser = this.browser;
-        this.config.version = '1.4.1';
 
         // isAnimal is off by default
         this.config.isAnimal = false;
-        if (browser.config.isAnimal === true || args.config.isAnimal === true) {
+        if (browser.config.isAnimal === true || args.isAnimal === true) {
           this.config.isAnimal = true;
+        }
+        this.config.dialog = false;
+        if (args.dialogMode === true) {
+          this.config.dialog = true;
         }
         if (this.config.isAnimal) {
           lang.extend(Alignments, {
@@ -62,7 +68,6 @@ define('SmallRNAPlugin/main', [
             _isAnimal: thisB._isAnimal
           });
         }
-
         // toolbar button
         browser.afterMilestone('initView', function () {
           var navBox = dom.byId("navbox");
@@ -81,6 +86,19 @@ define('SmallRNAPlugin/main', [
             }
           }, domConstruct.create('button', {}, navBox))
         });
+
+        // handle dialog mode
+        console.log(JSON.stringify(this.config.dialog));
+        if (this.config.dialog) {
+          browser.afterMilestone('completely initialized', function () {
+            if (browser.view.tracks.length < 1) {
+              setTimeout(function () {
+                var button = dijitRegistry.byId('smrna-filter-btn');
+                button.onClick();
+              }, 700)
+            }
+          }); // end milestone completely initialized
+        }
       }, // end constructor
 
       _isAnimal: function () {

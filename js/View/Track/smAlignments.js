@@ -1,5 +1,6 @@
 define("SmallRNAPlugin/View/Track/smAlignments", [
   'dojo/_base/declare',
+  'dojo/_base/lang',
   'dojo/_base/array',
   'dojo/promise/all',
   'dojo/dom-construct',
@@ -12,6 +13,7 @@ define("SmallRNAPlugin/View/Track/smAlignments", [
         ],
   function (
     declare,
+    lang,
     array,
     all,
     domConstruct,
@@ -30,7 +32,7 @@ define("SmallRNAPlugin/View/Track/smAlignments", [
       _defaultConfig: function () {
         var thisB = this;
         var c = Util.deepUpdate(
-          dojo.clone(this.inherited(arguments)), {
+          lang.clone(this.inherited(arguments)), {
             glyph: 'SmallRNAPlugin/View/FeatureGlyph/smAlignment',
             maxFeatureGlyphExpansion: 0,
             maxFeatureScreenDensity: 6,
@@ -109,7 +111,7 @@ define("SmallRNAPlugin/View/Track/smAlignments", [
         // store (not necessarily laid out yet)
         var allFeaturesRead = false;
 
-        var errorCallback = dojo.hitch(thisB, function (e) {
+        var errorCallback = lang.hitch(thisB, function (e) {
           this._handleError(e, args);
           finishCallback(e);
         });

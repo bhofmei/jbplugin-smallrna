@@ -33,7 +33,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             className: 'detail feature-detail feature-detail-'+track.name.replace(/\s+/g,'_').toLowerCase(),
             innerHTML: ''
         });
-        var fmt = dojo.hitch( this, function( name, value, feature ) {
+        var fmt = lang.hitch( this, function( name, value, feature ) {
             name = Util.ucFirst( name.replace(/_/g,' ') );
             return this.renderDetailField(container, name, value, feature);
         });
@@ -67,7 +67,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
                 return {source:1,seq_length:1,NH:1,CIGAR:1,seq_reverse_complemented:1}[t.toLowerCase()];
             }
         );
-        dojo.forEach( additionalTags, function(t) {
+        array.forEach( additionalTags, function(t) {
             if(t=="NH")
                 fmt("Number mapped locations",f.get(t),f);
             else
@@ -166,7 +166,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide23:{
                 desc: 'Hide 23-mers',
                 title: 'Show/hide 23 bp-long reads',
-                id: 'smrna-select-orange',
+                id: 'smrna-select-purple',
                 func: function(f){
                     return f.get('seq_length') != 23;
                 }
@@ -174,7 +174,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hide24:{
                 desc: 'Hide 24-mers',
                 title: 'Show/hide 24 bp-long reads',
-                id: 'smrna-select-red',
+                id: 'smrna-select-orange',
                 func: function(f){
                     return f.get('seq_length') != 24;
                 }
@@ -182,7 +182,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hidepi:{
                 desc: 'Hide piRNAs',
                 title: 'Show/hide piRNAs (26-31 bp)',
-                id: 'smrna-select-purple',
+                id: 'smrna-select-red',
                 func: function(f){
                     return !(f.get('seq_length') > 25 && f.get('seq_length') < 32);
                 }
@@ -190,7 +190,7 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             hideOthers:{
                 desc: 'Hide others',
                 title: 'Show/hide all other sized reads',
-                id: 'smrna-select-yellow',
+                id: 'smrna-select-gray',
                 func: function(f){
                     return this.config.isAnimal ? !(f.get('seq_length') < 21 || f.get('seq_length') > 31 || f.get('seq_length')==25) : !(f.get('seq_length') < 21 || f.get('seq_length') > 24);
                 }

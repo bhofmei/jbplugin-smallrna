@@ -1,4 +1,4 @@
-define('SmallRNAPlugin/main', [
+define([
     'dojo/_base/declare',
     'dojo/_base/array',
     'dojo/_base/lang',
@@ -80,7 +80,8 @@ define('SmallRNAPlugin/main', [
                 browser: browser,
                 config: thisB.config,
                 setCallback: function (options) {
-                  thisB.config = options;
+                  //thisB.config = options;
+                  lang.mixin(thisB.config, options);
                 }
               }).show();
             }

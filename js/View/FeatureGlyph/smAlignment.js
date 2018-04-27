@@ -29,7 +29,8 @@ define("SmallRNAPlugin/View/FeatureGlyph/smAlignment", [
                 var multimapping = (feature.get('supplementary_alignment') || (typeof feature.get('xm') != 'undefined' && feature.get('xm') > 1) || (typeof feature.get('nh') != 'undefined' && feature.get('nh') > 1))
                 // check if multimapping reads should be solid fill
                 if (multimapping && !track.config.style.solidFill) {
-                  return null;
+                  //return null;
+                  return '#FFFFFF';
                 }
                 var seqLen = feature.get('seq_length');
                 if (Math.abs(strand) != 1 && strand != '+' && strand != '-')

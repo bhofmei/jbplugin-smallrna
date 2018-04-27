@@ -1,5 +1,8 @@
 # Release Notes
 
+## [v1.4.4] - 2018-04-27
+- FIXED minor bug where it wouldn't work when using the NeatCanvasFeature plugin and there were multimapped reads
+
 ## [v1.4.3] - 2017-11-02
 - UPDATED small rna colors
   - 21: blue

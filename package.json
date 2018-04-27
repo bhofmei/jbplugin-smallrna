@@ -1,6 +1,6 @@
 {
     "name": "jbplugin-smallrna",
-    "version": "1.4.1",
+    "version": "1.4.4",
     "description": "JBrowse plugin for viewing small RNA alignments",
     "main": "js/main.js",
     "scripts": {

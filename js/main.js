@@ -45,7 +45,7 @@ define([
 
     return declare(JBrowsePlugin, {
       constructor: function (args) {
-        this.config.version = '1.4.4';
+        this.config.version = '1.4.5';
         console.log('SmallRNAPlugin starting - v' + this.config.version);
         var baseUrl = this._defaultConfig().baseUrl;
         var thisB = this;

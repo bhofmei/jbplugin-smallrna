@@ -1,5 +1,8 @@
 # Release Notes
 
+##[v1.4.5] - 2019-03-25
+- FIXED error with strand undefined in newer JBrowse versions; this was caused by a change in how JBrowse stores BAM data
+
 ## [v1.4.4] - 2018-04-27
 - FIXED minor bug where it wouldn't work when using the NeatCanvasFeature plugin and there were multimapped reads
 

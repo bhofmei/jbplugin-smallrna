@@ -65,7 +65,7 @@ return declare( null,{
         var strand = 0;
         if( data )
             rectangle.data = data;
-            strand = data.data.strand;
+            strand = data.get('strand');
         //console.log(JSON.stringify(rectangle.data.data));
         var top = this.originY-1;
         var topStart;

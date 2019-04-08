@@ -33,9 +33,10 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
             className: 'detail feature-detail feature-detail-'+track.name.replace(/\s+/g,'_').toLowerCase(),
             innerHTML: ''
         });
-        var fmt = lang.hitch( this, function( name, value, feature ) {
+        var fmt = lang.hitch( this, function( name, value, feature, unsafe ) {
+          if(unsafe===undefined) unsafe=false;
             name = Util.ucFirst( name.replace(/_/g,' ') );
-            return this.renderDetailField(container, name, value, feature);
+            return this.renderDetailField(container, name, value, feature, null, {}, unsafe);
         });
         fmt( 'Name', f.get('name'), f );
         fmt( 'Type', f.get('type'), f );
@@ -54,13 +55,13 @@ return declare([ MismatchesMixin, NamedFeatureFiltersMixin ], {
 
 
         if( f.get('seq') ) {
-            fmt('Sequence and Quality', this._renderSeqQual( f ), f );
+            fmt('Sequence and Quality', this._renderSeqQual( f ), f, true );
         }
         /* multimapping */
         var mm = (f.get('supplementary_alignment') || (typeof f.get('xm')!='undefined'&&f.get('xm')>1) || (typeof f.get('nh') != 'undefined' && f.get('nh') > 1 ));
         fmt("Multimapped",mm,f);
-        
-        /* change filtering options to only capture the options we are interested in 
+
+        /* change filtering options to only capture the options we are interested in
         seq, qual, supplementary_alignment, source, seq_length, NH, CIGAR, seq_reverse_complemented(?)*/
         var additionalTags = array.filter(
             f.tags(), function(t) {

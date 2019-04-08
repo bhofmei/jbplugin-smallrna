@@ -1,5 +1,10 @@
 # Release Notes
 
+## [v1.4.6] - 2019-04-08
+- FIXED error where base and quality didn't show up properly in the alignment
+dialog in the newer versions of JBrowse; caused by change in function parameters
+in DetailsMixin function
+
 ##[v1.4.5] - 2019-03-25
 - FIXED error with strand undefined in newer JBrowse versions; this was caused by a change in how JBrowse stores BAM data
 
